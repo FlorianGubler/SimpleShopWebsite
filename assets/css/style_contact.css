@@ -1,0 +1,65 @@
+@keyframes removeStatus{
+    from{ opacity: 1;}
+    to{ opacity: 0;}
+}
+.contact-form-container{
+    width: 100%;
+}
+.contact-form-container form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: space-around;
+}
+.contact-inputs-container{
+    position: relative;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: space-around;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: rgb(155, 155, 155);
+}
+.contact-inputs-container label{
+    margin-bottom: 5px;
+    font-size: small;
+}
+.contact-inputs-container input, .contact-inputs-container textarea{
+    border: 1px solid rgb(211, 211, 211);
+    padding: 5px;
+    width: 500px;
+}
+.contact-inputs-container textarea{
+    height: 100px;
+    resize: vertical;
+}
+.contact-form-container button{
+    margin: 10px;
+    border: 1px solid rgb(211, 211, 211);
+    background-color: rgb(170, 170, 170);
+    padding: 10px;
+    width: fit-content;
+    cursor: pointer;
+}
+.contact-upload-success, .contact-upload-failed{
+    width: fit-content;
+    padding: 5px;
+    margin: 10px;
+    background-color: rgb(233, 233, 233);
+    animation: removeStatus;
+    animation-duration: 3s;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.contact-upload-failed p{
+    color: red;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.contact-upload-success p{
+    color: green;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
