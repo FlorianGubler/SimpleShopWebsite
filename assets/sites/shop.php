@@ -2,7 +2,7 @@
 include "../../config.php";
 
 $products = $conn->getAllProducts();
-$allActiveColors = $conn->getAllColors();
+$allActiveColors = $conn->getAllActiveColors();
 
 $maxminPrice = $conn->getMaxMinPrice();
 

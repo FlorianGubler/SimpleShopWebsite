@@ -24,9 +24,11 @@ if(!isset($_SESSION)) {
 //Set Defaults
 if(!isset($_SESSION["admin"])){
     $_SESSION["admin"] = false;
-}
-if(!isset($_SESSION["adminuser"])){
+    $_SESSION["adminid"] = null;
     $_SESSION["adminuser"] = false;
+
+} else if($_SESSION["admin"]){
+    $_SESSION["adminuser"] = $conn->getUserData($_SESSION["adminid"]);
 }
 if(!isset($_SESSION["cart"])){
     $_SESSION["cart"] = [];

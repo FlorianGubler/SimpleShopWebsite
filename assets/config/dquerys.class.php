@@ -99,10 +99,22 @@ class DBquery
         }
     }
 
-    function getAllColors()
+    function getAllActiveColors()
     {
         $colors = array();
         $sql = "SELECT * FROM product_colors INNER JOIN shop_colors ON FK_color = PK_color";
+        $qry = $this->dbconn->query($sql);
+
+        while ($result = $qry->fetch_assoc()) {
+            array_push($colors, $result);
+        }
+        return $colors;
+    }
+
+    function getAllColors()
+    {
+        $colors = array();
+        $sql = "SELECT * FROM shop_colors";
         $qry = $this->dbconn->query($sql);
 
         while ($result = $qry->fetch_assoc()) {
@@ -148,15 +160,9 @@ class DBquery
         return false;
     }
 
-    function checkSessionID($sessionid){
-        $sql = "SELECT * FROM admins";
-        $qry = $this->dbconn->query($sql);
-
-        while ($result = $qry->fetch_assoc()) {
-            if(hash("sha256", $result["email"] . $_SERVER["REMOTE_ADDR"] . $result["password"]) == $sessionid){
-                return $result;
-            }
-        }
-        return false;
+    function getUserData($id){
+        $id = $this->dbconn->real_escape_string($id);
+        $sql = "SELECT * FROM admins WHERE PK_admin = $id";
+        return $this->dbconn->query($sql)->fetch_assoc();
     }
 }

@@ -20,7 +20,13 @@ if (isset($_POST['getjsonofproduct'])) {
     </a>
 </div>
 <div class="header-bar">
-    <div></div>
+    <div style="margin-left: 70px;">
+        <?php
+            if($_SESSION["admin"]){
+                echo $_SESSION["adminuser"]["username"] . " <i style='color: darkgray'>(" . $_SESSION["adminuser"]["email"] . ")</i>";
+            }
+        ?>
+    </div>
     <div class="navbar-logo-container">
         <img src="<?php echo $rootpath ?>/assets/img/logo.png">
     </div>

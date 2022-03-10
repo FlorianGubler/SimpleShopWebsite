@@ -5,7 +5,7 @@
 }
 @keyframes showMenu {
     from {opacity: 0;}
-    to {opacity: 0.9;}
+    to {opacity: 0.95;}
 }
 span.title{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -35,7 +35,7 @@ button:focus{
     position: fixed;
     top: 0;
     left: 0;
-    opacity: 0.9;
+    opacity: 0.95;
     padding: 15px;
 }
 .closeNav{

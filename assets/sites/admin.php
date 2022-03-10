@@ -9,14 +9,17 @@ if(isset($_GET['upload'])){
 
 if(isset($_GET["logout"])){
     $_SESSION["admin"] = false;
+    $_SESSION["adminid"] = null;
     $_SESSION["adminuser"] = false;
     session_destroy();
     header("Location: " . $_SERVER["PHP_SELF"]);
 }
 
 if(isset($_POST['admin-login'])){
-    if($conn->checkLogin($_POST['email'], $_POST['password'])){
+    $admincheck = $conn->checkLogin($_POST['email'], $_POST['password']);
+    if($admincheck != false){
         $_SESSION["admin"] = true;
+        $_SESSION["adminid"] = $admincheck;
         header("Location: " . $_SERVER["PHP_SELF"]);
     }
     else{
@@ -52,7 +55,7 @@ include '../../navbar.php';
                         </div>
                         <div class="contact-inputs-container">
                             <label for=input-password">Password</label>
-                            <input id="input-subject" type="password" name="password" placeholder="" required>
+                            <input id="input-subject" type="password" name="password" placeholder="Your Password" required>
                         </div>
 
                         <button type="submit" name="admin-login">Login</button>
@@ -70,16 +73,67 @@ include '../../navbar.php';
             <?php
         } else{
             $contacts = $conn->getCustomerRequest();
+            $allcolors = $conn->getAllColors();
+            $products = $conn->getAllProducts();
             ?>
             <h3>Admin Tools</h3>
-            <div class="add-product-form">
-                <span class="title">Add Product</span>
-                <form action="" method="POST">
-                    <div class="contact-inputs-container">
-                        <label for="inp-productname">Product Name</label>
-                        <input type="inp-productname" name="productname" required>
-                    </div>
-                </form>
+            <div style="display: flex; flex-direction: row;">
+                <div class="add-product-form" style="width: 100%">
+                    <span class="title">Add Product</span>
+                    <form action="" method="POST">
+                        <div class="contact-inputs-container">
+                            <label for="inp-productname">Product Name</label>
+                            <input type="text" id="inp-productname" name="productname" required>
+                        </div>
+                        <div class="contact-inputs-container">
+                            <label for="inp-price">Product Price</label>
+                            <input type="number" step="0.01" id="inp-price" name="productprice" required>
+                        </div>
+                        <div class="contact-inputs-container">
+                            <label for="inp-colors">Product Colors</label>
+                            <select id="inp-colors" name="productcolors" multiple required>
+                                <?php
+                                foreach ($allcolors as $color){
+                                    echo "<option value='" . $color["colorcode"] . "'>" . $color["color_tag"] . "</option>";
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="contact-inputs-container">
+                            <label for="inp-pictures">Product Pictures</label>
+                            <input id="inp-pictures" type="file" multiple>
+                        </div>
+                    </form>
+                </div>
+                <div style="width: 100%">
+                    <span class="title">Products</span>
+                    <table>
+                        <tr>
+                            <th>Product-ID</th>
+                            <th>Productname</th>
+                            <th>Price</th>
+                            <th>Status</th>
+                        </tr>
+                        <?php
+                        foreach ($products as $product){
+                            ?>
+                            <tr>
+                                <td><?php echo "#" . $product["PK_product"]?></td>
+                                <td><?php echo $product["productname"]?></td>
+                                <td><?php echo $product["price"]?></td>
+                                <td>
+                                    <form method="POST">
+                                        <select name="status">
+                                            <option><?php echo $product["status"]?></option>
+                                        </select>
+                                    </form>
+                                </td>
+                            </tr>
+                            <?php
+                        }
+                        ?>
+                    </table>
+                </div>
             </div>
             <div class="contact-table">
                 <div class="table-container">
