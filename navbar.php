@@ -63,30 +63,9 @@ if (isset($_POST['getjsonofproduct'])) {
     <div class="cart-content-container">
         <p class="cart-title">Cart <i class="fas fa-shopping-cart"></i></p>
         <button class="close-cart-btn" onclick="closecart();"><i class="fas fa-times"></i></button>
-        <ul class="cart-container-list">
-            <li>
-                <ul id="cart-items-list">
+        <div id="cart-content-container">
 
-                </ul>
-            </li>
-            <li id="cart-calc-price" class="cart-calc-price">
-                <table>
-                    <tr>
-                        <th>Price products: </th>
-                        <td>CHF <span id="products-endprice"></span>.-</td>
-                    </tr>
-                    <tr>
-                        <th>Shipping: </th>
-                        <td>CHF <span id="products-shippingprice"></span>.-</td>
-                    </tr>
-                    <tr>
-                        <th>Endprice: </th>
-                        <td>CHF <span id="endprice"></span>.-</td>
-                    </tr>
-                </table>
-            </li>
-        </ul>
-        <div id="cart-items-empty">Cart is empty</div>
+        </div>
         <button class="cart-checkout-btn">Checkout</button>
     </div>
 </div>

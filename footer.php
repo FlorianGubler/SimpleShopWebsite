@@ -15,8 +15,8 @@
     </ul>
     <div class="footer-socialmedia-container">
         <ul>
-            <li><a href="https://www.instagram.com/flo.rian_zh/"><i class="fab fa-instagram"></i></a></li>
-            <li><a href="mailto:gubler.florian@gmx.net"><i class="far fa-envelope"></i></a></li>
+            <li><a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a></li>
+            <li><a href="mailto:"><i class="far fa-envelope"></i></a></li>
         </ul>
     </div>
     <div class="footer-extra-container">

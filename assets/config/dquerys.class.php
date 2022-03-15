@@ -99,6 +99,10 @@ class DBquery
         }
     }
 
+    function getColorByID($coloID){
+
+    }
+
     function getAllActiveColors()
     {
         $colors = array();
@@ -123,13 +127,13 @@ class DBquery
         return $colors;
     }
 
-    function getJSONofProduct($PKproduct)
+    function getProduct($PKproduct)
     {
         $sql = "SELECT * FROM products WHERE PK_product=$PKproduct;";
         $result = $this->dbconn->query($sql)->fetch_assoc();
         $result["picture"] = $this->getPicturesOfProduct($PKproduct)[0];
         $result["colors"] = $this->getColorsOfProduct($PKproduct);
-        return json_encode($result);
+        return $result;
     }
 
     function getMaxMinPrice()
