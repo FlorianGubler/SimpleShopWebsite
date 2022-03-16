@@ -20,6 +20,19 @@
         </ul>
     </div>
     <div class="footer-extra-container">
+        <ul style="display:flex; flex-direction: row; align-items: center; justify-content: flex-end;">
+            <?php
+                $alllanguages = array_diff(scandir($_SERVER['DOCUMENT_ROOT'] . "/assets/language/"), array('.', '..'));
+                foreach ($alllanguages as $file) {
+                    $iscurrent = "";
+                    $lang = pathinfo($file, PATHINFO_FILENAME);
+                    if(strtolower($lang) == $_SESSION["lang"]){
+                        $iscurrent = "text-decoration: underline;";
+                    }
+                    echo "<li style='list-style: none; margin: 5px;'><a style='text-decoration: none; $iscurrent' href='$rootpath/actionmgr.php?action=changelanguage&redirect=" . $_SERVER["PHP_SELF"] . "&newlang=$lang'>" . strtoupper($lang) . "</a></li>";
+                }
+            ?>
+        </ul>
         <p class="footer-cp-text">
             &copy; by Florian Gubler, Jon Bunjaku, Milka Grolp 2022 (Projekt Modul 133)
         </p>

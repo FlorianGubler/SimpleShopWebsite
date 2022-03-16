@@ -99,10 +99,6 @@ class DBquery
         }
     }
 
-    function getColorByID($coloID){
-
-    }
-
     function getAllActiveColors()
     {
         $colors = array();
@@ -113,6 +109,11 @@ class DBquery
             array_push($colors, $result);
         }
         return $colors;
+    }
+
+    function getColorByID($colorid){
+        $sql = "SELECT * FROM shop_colors WHERE PK_color = $colorid";
+        return $this->dbconn->query($sql)->fetch_assoc();
     }
 
     function getAllColors()

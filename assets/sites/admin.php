@@ -36,7 +36,7 @@ if(isset($_POST['admin-login'])){
     ?>
     <link rel="stylesheet" href="<?php echo $rootpath?>/assets/css/style_admin.css">
     <link rel="stylesheet" href="<?php echo $rootpath?>/assets/css/style_contact.css">
-    <title>Shop Gruppenprojekt - Admin Login</title>
+    <title>Shop Gruppenprojekt - Admin</title>
 </head>
 
 <body>

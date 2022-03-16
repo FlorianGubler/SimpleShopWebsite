@@ -67,7 +67,7 @@ $maxminPrice = $conn->getMaxMinPrice();
                     if ($product["status"] != "sold_out") {
                     ?>
                         <div class="product-addtocart-container">
-                            <button onclick="addtocart(<?php echo $product['PK_product']; ?>);"><i class="fas fa-cart-arrow-down"></i></button>
+                            <button onclick="addtocart(<?php echo $product['PK_product']; ?>, 1);"><i class="fas fa-cart-arrow-down"></i></button>
                         </div>
                     <?php
                     } else {

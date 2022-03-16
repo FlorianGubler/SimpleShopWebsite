@@ -40,8 +40,7 @@ if(!isset($_SESSION["lang"])){
 //Include Language File
 require_once("assets/language/" . $_SESSION["lang"] . ".php");
 
-//TODO: Language Support
-//TODO: Cart Server Based (Stored in Session)
-//TODO: STORY Site
 //TODO: Admin Page add Product & List Products
+//TODO: Language Support
+//TODO: Ordering & (Payment)
 //TODO: CSS Optimization

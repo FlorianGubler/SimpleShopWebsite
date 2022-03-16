@@ -17,76 +17,47 @@ function reloadCart() {
     xhttp.send();
 }
 
-function addtocart(pkProduct) {
-    if (localStorage.hasOwnProperty('cart-items')) {
-        if (JSON.parse(localStorage.getItem('cart-items')).length != 0) {
-            items = JSON.parse(localStorage.getItem('cart-items'));
-            if (!checkifProductisinCart(items, pkProduct)) {
-                items.push([pkProduct, 1]);
-            }
-            else {
-                items.forEach(item => {
-                    if (item[0] == pkProduct) {
-                        item[1] += 1;
-                    }
-                })
-            }
-            localStorage.setItem('cart-items', JSON.stringify(items));
+function addtocart(pkProduct, color) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            reloadCart();
         }
-        else {
-            createcartwithitem(pkProduct);
-        }
-    } else {
-        createcartwithitem(pkProduct);
-    }
-    document.getElementById("addtocart-success").style.display = "block";
-    reloadCart();
+    };
+    xhttp.open("POST", rootpath + "/actionmgr.php", true);
+    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhttp.send("action=addtocart&productid=" + pkProduct + "&productcolor=" + color);
 }
-function deleteItemFromCart(pkProduct, reload) {
-    items = JSON.parse(localStorage.getItem("cart-items"));
-    counter = 0;
-    items.forEach(item => {
-        if (item[0] == pkProduct) {
-            items.splice(counter, 1);
+function deleteItemFromCart(pkProduct, color) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            reloadCart();
         }
-        counter++;
-    })
-    localStorage.setItem('cart-items', JSON.stringify(items));
-    if (reload) {
-        reloadCart();
-    }
+    };
+    xhttp.open("POST", rootpath + "/actionmgr.php", true);
+    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhttp.send("action=deletefromcart&productid=" + pkProduct + "&productcolor=" + color);
 }
-function amountMinusCart(pkProduct) {
-    items = JSON.parse(localStorage.getItem("cart-items"));
-    items.forEach(item => {
-        if (item[0] == pkProduct) {
-            item[1] -= 1;
-            if (item[1] <= 0) {
-                deleteItemFromCart(pkProduct, false);
-            }
+function amountMinusCart(pkProduct, color) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            reloadCart();
         }
-    })
-    localStorage.setItem('cart-items', JSON.stringify(items));
-    reloadCart();
+    };
+    xhttp.open("POST", rootpath + "/actionmgr.php", true);
+    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhttp.send("action=cartamountminus&productid=" + pkProduct + "&productcolor=" + color);
 }
-function amountPlusCart(pkProduct) {
-    items = JSON.parse(localStorage.getItem("cart-items"));
-    items.forEach(item => {
-        if (item[0] == pkProduct) {
-            item[1] += 1;
+function amountPlusCart(pkProduct, color) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            reloadCart();
         }
-    })
-    localStorage.setItem('cart-items', JSON.stringify(items));
-    reloadCart();
-}
-function createcartwithitem(pkProduct) {
-    localStorage.setItem('cart-items', JSON.stringify([[pkProduct, 1]]));
-}
-function checkifProductisinCart(items, pkProduct) {
-    for (let i = 0; i < items.length; i++) {
-        if (items[i][0] == pkProduct) {
-            return items[i];
-        }
-    }
-    return false;
+    };
+    xhttp.open("POST", rootpath + "/actionmgr.php", true);
+    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhttp.send("action=cartamountplus&productid=" + pkProduct + "&productcolor=" + color);
 }
