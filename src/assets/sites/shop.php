@@ -64,7 +64,7 @@ $maxminPrice = $conn->getMaxMinPrice();
                     if ($product["status"] != "sold_out") {
                     ?>
                         <div class="product-addtocart-container">
-                            <button onclick="addtocart(<?php echo $product['PK_product']; ?>, 1);"><i class="fas fa-cart-arrow-down"></i></button>
+                            <button onclick="openColorChoose(JSON.parse(decodeURIComponent('<?php echo urlencode(json_encode($product['colors'])); ?>')))"><i class="fas fa-cart-arrow-down"></i></button>
                         </div>
                     <?php
                     } else {
@@ -103,6 +103,18 @@ $maxminPrice = $conn->getMaxMinPrice();
         echo "</div>";
         ?>
     </div>
+    <script>
+        function openColorChoose(colors){
+            container = CreatePopUpWindow('Choose Product Color');
+            content = container.getElementsByClassName("popup-content")[0];
+            colorcontainer = content.appendChild(document.createElement("div"));
+            colorcontainer.className = "colorcontainer";
+            colors.forEach(color => {
+                colorcontainer.innerHTML += '<div class="product-color-coloritem cart-color-coloritem" style="background-color: ' + color + '"></div>';
+            })
+            //addtocart(<?php echo $product['PK_product']; ?>, 1);
+        }
+    </script>
     <script src="<?php echo $rootpath; ?>/assets/js/slider.js"></script>
     <script src="<?php echo $rootpath; ?>/assets/js/product_search.js"></script>
     <?php

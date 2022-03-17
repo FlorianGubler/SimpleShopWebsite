@@ -1,0 +1,146 @@
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.49);
+    z-index: 10000;
+}
+
+.popup {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: space-between;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid gray;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.75);
+    border-radius: 4px;
+    width: fit-content;
+}
+
+.popup-header {
+    padding: 5px;
+    border-bottom: 1px solid gray;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.popup-header button:focus {
+    outline: none;
+}
+
+.popup-title {
+    color: gray;
+}
+
+.popup-content {
+    position: relative;
+    max-height: 80vh;
+    max-width: 60vw;
+    overflow: auto;
+    padding: 5px;
+}
+
+.popup-header span {
+    font-size: smaller;
+}
+
+.popup-header button {
+    background-color: transparent;
+    border: none;
+    width: 25px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.popup-header button:hover {
+    opacity: 0.8;
+}
+
+.popup-header button img {
+    width: 100%;
+    height: 100%;
+}
+
+.popup-body {
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 50px;
+    width: 100%;
+}
+
+.colorcontainer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.popup-footer {
+    width: 100%;
+    border-top: 1px solid grey;
+    padding: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.popup-footer button {
+    min-width: fit-content;
+    width: 30%;
+    max-width: 175px;
+}
+
+.hover-popup {
+    margin: 5px;
+    cursor: pointer;
+    position: relative;
+}
+
+.hover-popup .img-container {
+    width: 20px;
+}
+
+.hover-popup .img-container img path {
+    fill: black;
+}
+
+.hover-popup:hover .hover-popup-popup {
+    display: flex;
+}
+
+.hover-popup-popup {
+    display: none;
+    min-width: 175px;
+    width: fit-content;
+    background-color: grey;
+    color: gray;
+    text-align: center;
+    border-radius: 2px;
+    padding: 3px;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 25px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: left;
+    font-size: small;
+}
+
+.hover-popup-popup * {
+    font-size: small;
+    margin: 2px;
+}

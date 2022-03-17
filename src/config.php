@@ -44,6 +44,7 @@ if(!isset($_SESSION["lang"])){
 //Include Language File
 require_once("assets/language/" . $_SESSION["lang"] . ".php");
 
+//TODO: Add Product to Cart -> Choose Color
 //TODO: Admin Page add Product & List Products
 //TODO: Language Support
 //TODO: Ordering & (Payment)

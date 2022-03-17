@@ -49,10 +49,10 @@ include '../../navbar.php';
                             <h3>Payment</h3>
                             <label for="fname">Accepted Cards</label>
                             <div class="icon-container">
-                                <i class="fa fa-cc-visa" style="color:navy;"></i>
-                                <i class="fa fa-cc-amex" style="color:blue;"></i>
-                                <i class="fa fa-cc-mastercard" style="color:red;"></i>
-                                <i class="fa fa-cc-discover" style="color:orange;"></i>
+                                <i class="fa-brands fa-cc-visa" style="color:navy;"></i>
+                                <i class="fa-brands fa-cc-amex" style="color:blue;"></i>
+                                <i class="fa-brands fa-cc-mastercard" style="color:red;"></i>
+                                <i class="fa-brands fa-cc-discover" style="color:orange;"></i>
                             </div>
                             <label for="cname">Name on Card</label>
                             <input type="text" id="cname" name="cardname" placeholder="John More Doe">
@@ -80,6 +80,7 @@ include '../../navbar.php';
             <div class="container" style="background-color: white" id="checkout-cart-container">
             </div>
             <script>
+                addCartShow("checkout-cart-container");
                 reloadCart();
             </script>
         </div>

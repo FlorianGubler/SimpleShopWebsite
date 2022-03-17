@@ -4,7 +4,7 @@
     width: 100%;
 }
 
-.admintools table td, table th {
+.admintools table td, .admintools table th {
     border: 1px solid #ddd;
     padding: 8px;
 }

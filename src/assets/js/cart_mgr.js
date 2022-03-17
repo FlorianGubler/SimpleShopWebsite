@@ -5,6 +5,10 @@ function expandcart() {
 function closecart() {
     document.getElementById("cart-container").style.display = "none";
 }
+const secondarycartshower = [];
+function addCartShow(el){
+    secondarycartshower.push(el);
+}
 function reloadCart() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -12,7 +16,9 @@ function reloadCart() {
             // Typical action to be performed when the document is ready:
             document.getElementById("cart-content-container").innerHTML = this.responseText;
             try{
-                document.getElementById("checkout-cart-container").innerHTML = this.responseText;
+                secondarycartshower.forEach(el => {
+                    document.getElementById(el).innerHTML = this.responseText;
+                })
             } catch (e) {
 
             }

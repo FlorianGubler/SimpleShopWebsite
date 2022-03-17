@@ -5,6 +5,7 @@ include "config.php";
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="<?php echo $rootpath ?>/assets/css/style_navbar.css">
+<link rel="stylesheet" href="<?php echo $rootpath ?>/assets/css/style_popup.css">
 <script src="<?php echo $rootpath ?>/assets/js/popup.js"></script>
 <link rel="stylesheet" href="<?php echo $rootpath ?>/assets/css/style_footer.css">
 <link rel="stylesheet" href="<?php echo $rootpath ?>/assets/css/add_style_product.css">
