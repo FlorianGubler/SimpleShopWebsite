@@ -1,7 +1,7 @@
 <div class="footer-container">
     <ul>
         <li class="footer-ul-item">
-            <a href="<?php echo $rootpath ?>/index.php">Home</a>
+            <a href="<?php echo $rootpath ?>/src/index.php.php">Home</a>
         </li>
         <li class="footer-ul-item">
             <a href="<?php echo $rootpath ?>/assets/sites/shop.php">Shop</a>

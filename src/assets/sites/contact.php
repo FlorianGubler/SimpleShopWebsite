@@ -21,7 +21,7 @@
 
 <head>
     <?php
-        include '../../header.php'
+    include '../../header.php'
     ?>
     <link rel="stylesheet" href="<?php echo $rootpath?>/assets/css/style_contact.css">
     <title>Shop Gruppenprojekt - Contact</title>

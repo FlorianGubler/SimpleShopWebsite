@@ -20,7 +20,7 @@ include '../../navbar.php';
     <div class="row">
         <div class="col-75">
             <div class="container">
-                <form action="<?php echo $rootpath; ?>/actionmgr.php" method="POST">
+                <form action="<?php echo $rootpath; ?>/src/actionmgr.php.php" method="POST">
                     <div class="row">
                         <div class="col-50">
                             <h3>Address</h3>

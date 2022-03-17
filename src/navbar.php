@@ -37,7 +37,7 @@ if (isset($_POST['getjsonofproduct'])) {
 <div id="navbar" class="navbar-container">
     <ul>
         <li class="navbar-ul-item">
-            <a href="<?php echo $rootpath ?>/index.php">HOME</a>
+            <a href="<?php echo $rootpath ?>/src/index.php.php">HOME</a>
         </li>
         <li class="navbar-ul-item">
             <a href="<?php echo $rootpath ?>/assets/sites/shop.php">SHOP</a>
