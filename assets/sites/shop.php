@@ -27,9 +27,6 @@ $maxminPrice = $conn->getMaxMinPrice();
     include '../../navbar.php';
     ?>
     <div class="site-div-content-container">
-        <div id="addtocart-success">
-            <p style="color: green; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"><i class="fas fa-check"></i> Product succesfully moved to cart</p>
-        </div>
         <div class="searchbar-container">
             <div class="searchbar-content-container">
                 <p class="searchbar-icon-container"><i class="fas fa-search"></i></p>
@@ -42,7 +39,7 @@ $maxminPrice = $conn->getMaxMinPrice();
                     <?php
                     foreach ($allActiveColors as $color) {
                     ?>
-                        <option><?php echo $color["color_tag"]; ?></option>
+                        <option><?php echo strtoupper($color["color_tag"]); ?></option>
                     <?php
                     }
                     ?>

@@ -82,7 +82,7 @@ $shippingprice = 5;
     <?php
     } else{
         ?>
-        <li style="width: 100%; text-align: center">Cart is empty</li>
+        <li style="width: 100%; text-align: center; margin-top: 10px" class="cart-empty">Cart is empty</li>
         <?php
     }
     ?>

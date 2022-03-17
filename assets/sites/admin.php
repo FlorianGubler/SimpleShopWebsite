@@ -3,15 +3,14 @@ include "../../config.php";
 $contact_upload_failed = false;
 $contact_uploaded = false;
 
-if(isset($_GET['upload'])){
-    $contact_uploaded = $_GET['upload'];
+if(isset($_POST["addproduct"])){
+    var_dump($_POST);
 }
 
 if(isset($_GET["logout"])){
     $_SESSION["admin"] = false;
     $_SESSION["adminid"] = null;
     $_SESSION["adminuser"] = false;
-    session_destroy();
     header("Location: " . $_SERVER["PHP_SELF"]);
 }
 
@@ -23,7 +22,7 @@ if(isset($_POST['admin-login'])){
         header("Location: " . $_SERVER["PHP_SELF"]);
     }
     else{
-        $contact_upload_failed = true;
+        $failed = true;
     }
 }
 ?>
@@ -43,7 +42,7 @@ if(isset($_POST['admin-login'])){
 <?php
 include '../../navbar.php';
 ?>
-<div class="site-div-content">
+<div class="site-div-content admintools">
     <?php
         if(!$_SESSION["admin"]){
             ?>
@@ -62,7 +61,7 @@ include '../../navbar.php';
                     </form>
                 </div>
                 <?php
-                    if($contact_upload_failed){
+                    if($failed){
                         ?>
                             <div class="contact-upload-failed">
                                 <p><i class="fas fa-times"></i> Login failed, please try again</p>
@@ -101,8 +100,9 @@ include '../../navbar.php';
                         </div>
                         <div class="contact-inputs-container">
                             <label for="inp-pictures">Product Pictures</label>
-                            <input id="inp-pictures" type="file" multiple>
+                            <input id="inp-pictures" type="file" multiple required>
                         </div>
+                        <button type="submit" name="addproduct" class="normal-btn">Add Product</button>
                     </form>
                 </div>
                 <div style="width: 100%">

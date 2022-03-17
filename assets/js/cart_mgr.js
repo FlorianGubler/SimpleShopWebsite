@@ -11,6 +11,11 @@ function reloadCart() {
         if (this.readyState == 4 && this.status == 200) {
             // Typical action to be performed when the document is ready:
             document.getElementById("cart-content-container").innerHTML = this.responseText;
+            try{
+                document.getElementById("checkout-cart-container").innerHTML = this.responseText;
+            } catch (e) {
+
+            }
         }
     };
     xhttp.open("GET", rootpath + "/assets/widgets/cart.php", true);
@@ -21,7 +26,10 @@ function addtocart(pkProduct, color) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
+            showMessage("success", "Successful added to Cart")
             reloadCart();
+        } else if(this.readyState == 4){
+            showMessage("error", "Something went wrong, please try again later")
         }
     };
     xhttp.open("POST", rootpath + "/actionmgr.php", true);
@@ -32,7 +40,10 @@ function deleteItemFromCart(pkProduct, color) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
+            showMessage("success", "Successful removed from Cart")
             reloadCart();
+        } else if(this.readyState == 4){
+            showMessage("error", "Something went wrong, please try again later")
         }
     };
     xhttp.open("POST", rootpath + "/actionmgr.php", true);
@@ -44,6 +55,8 @@ function amountMinusCart(pkProduct, color) {
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             reloadCart();
+        } else if(this.readyState == 4){
+            showMessage("error", "Something went wrong, please try again later")
         }
     };
     xhttp.open("POST", rootpath + "/actionmgr.php", true);
@@ -55,6 +68,8 @@ function amountPlusCart(pkProduct, color) {
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             reloadCart();
+        } else if(this.readyState == 4){
+            showMessage("error", "Something went wrong, please try again later")
         }
     };
     xhttp.open("POST", rootpath + "/actionmgr.php", true);

@@ -69,6 +69,7 @@ if (isset($_POST['getjsonofproduct'])) {
         <button class="cart-checkout-btn" onclick="location.href = rootpath + '/assets/sites/checkout.php'"><i class="fa fa-shopping-cart"></i> Checkout</button>
     </div>
 </div>
+<div id="messages-container"></div>
 <noscript>You need to have JavaScript enabled to run this site</noscript>
 <script src="<?php echo $rootpath; ?>/assets/js/expandmenu.js"></script>
 <script src="<?php echo $rootpath; ?>/assets/js/cart_mgr.js"></script>

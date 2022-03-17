@@ -21,6 +21,10 @@ if(!isset($_SESSION)) {
     session_start();
 }
 
+if(isset($_GET["sessclr"]) && $_GET["sessclr"] == "true"){
+    $_SESSION = [];
+}
+
 //Set Defaults
 if(!isset($_SESSION["admin"])){
     $_SESSION["admin"] = false;

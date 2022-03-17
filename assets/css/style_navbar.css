@@ -294,3 +294,40 @@ top: 18px;
 width: 0%;
 left: 50%;
 }
+.normal-btn{
+    width: 100%;
+    padding: 5px;
+    background-color: #dcdcdc;
+    color: black;
+    border: 1px solid #a8a8a8;
+    border-radius: 0;
+    cursor: pointer;
+}
+.normal-btn:hover{
+    opacity: 0.8;
+}
+#messages-container{
+    position: fixed;
+    top: 60px;
+    right: 0;
+    margin: 5px;
+    z-index: 100;
+}
+#messages-container .message{
+    background-color: rgb(255, 255, 255);
+    animation: addtocartMessage;
+    animation-duration: 4s;
+
+    /* For after Animation (Remove el) */
+    opacity: 0;
+    width: 0;
+    height: 0;
+    padding: 0;
+    margin: 0;
+    border: none;
+}
+@keyframes addtocartMessage{
+    0%{opacity: 1;width: fit-content;height: fit-content; padding: 10px; border: 1px solid rgb(165, 165, 165); margin-bottom: 5px}
+    80%{opacity: 1;}
+    100%{opacity: 0;width: fit-content;height: fit-content; padding: 10px; border: 1px solid rgb(165, 165, 165); margin-bottom: 5px}
+}

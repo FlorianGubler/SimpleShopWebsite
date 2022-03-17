@@ -1,7 +1,4 @@
-@keyframes addtocartMessage{
-    from{opacity: 1;}
-    to{opacity: 0;}
-}
+
 .products-content-container{
     position: relative;
     top: 60px;
@@ -51,20 +48,6 @@
     display: none;
     margin: 10px;
     padding: 5px;
-}
-#addtocart-success{
-    background-color: rgb(255, 255, 255);
-    border: 1px solid rgb(165, 165, 165);
-    padding: 10px;
-    animation: addtocartMessage;
-    animation-duration: 2s;
-    opacity: 0;
-    width: fit-content;
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin: 10px;
-    display: none;
 }
 #price-filter-slider-textval{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;

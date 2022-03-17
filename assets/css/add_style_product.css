@@ -76,7 +76,7 @@
     width: 30px;
     padding: 5px;
     background-color: white;
-    z-index: 10;
+    z-index: 4;
 }
 .product-addtocart-container button{
     background-color: rgba(0, 0, 0, 0);
