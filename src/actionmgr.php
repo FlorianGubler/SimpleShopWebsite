@@ -8,6 +8,7 @@ if(isset($_POST["action"]) || isset($_GET["action"])){
         case "cartamountminus": CartAmountMinus($method["productid"], $method["productcolor"]); break;
         case "cartamountplus": CartAmountPlus($method["productid"], $method["productcolor"]); break;
         case "changelanguage": changeLanguage(strtolower($method["newlang"])); break;
+        case "adminchangeproductstatus": echo $conn->Admin_ChangeProductStatus($method["productid"], $method["newstatus"]); breaK;
         default: throw new Exception("Unknown Action");
     }
     if(isset($method["redirect"])){
@@ -16,8 +17,9 @@ if(isset($_POST["action"]) || isset($_GET["action"])){
 } else {
     throw new Exception("Action not given");
 }
+
 function addToCart($pkProduct, $color){
-    foreach ($_SESSION["cart"] as $index=>$product){
+    foreach ($_SESSION["cart"] as $product){
         if($product[0] == $pkProduct && $product[2] == $color){
             CartAmountPlus($pkProduct, $color);
             return;
@@ -30,6 +32,8 @@ function removeFromCart($pkProduct, $color){
         if($product[0] == $pkProduct && $product[2] == $color){
             array_splice($_SESSION["cart"], $index, 1);
             return;
+        } else{
+            var_dump($product);
         }
     }
 }

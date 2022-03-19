@@ -78,6 +78,12 @@
     background-color: white;
     z-index: 4;
 }
+.cart-color-btn{
+    cursor: pointer;
+}
+.cart-color-btn:hover{
+    opacity: 0.5;
+}
 .product-addtocart-container button{
     background-color: rgba(0, 0, 0, 0);
     border: none;

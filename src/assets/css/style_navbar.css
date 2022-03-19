@@ -144,6 +144,10 @@ button:focus{
     margin-top: 5px;
     font-size: large;
 }
+#cart-content-container{
+    overflow-y: auto;
+    max-height: 85%;
+}
 .close-cart-btn{
     position: absolute;
     top: 0;
@@ -309,7 +313,8 @@ left: 50%;
 #messages-container{
     position: fixed;
     top: 60px;
-    right: 0;
+    left: 50%;
+    transform: translate(-50%);
     margin: 5px;
     z-index: 100;
 }
@@ -330,4 +335,9 @@ left: 50%;
     0%{opacity: 1;width: fit-content;height: fit-content; padding: 10px; border: 1px solid rgb(165, 165, 165); margin-bottom: 5px}
     80%{opacity: 1;}
     100%{opacity: 0;width: fit-content;height: fit-content; padding: 10px; border: 1px solid rgb(165, 165, 165); margin-bottom: 5px}
+}
+.center-label{
+    width: 100%;
+    text-align: center;
+    padding: 5px;
 }

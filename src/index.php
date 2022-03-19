@@ -61,7 +61,7 @@ $newestproducts = $conn->getNewestProducts(3);
                             <?php
                             foreach ($product["colors"] as $product_color) {
                             ?>
-                                <div class="product-color-coloritem" style="background-color: <?php echo $product_color; ?>;"></div>
+                                <div class="product-color-coloritem" style="background-color: <?php echo $product_color['colorcode']; ?>;"></div>
                             <?php
                             }
                             ?>

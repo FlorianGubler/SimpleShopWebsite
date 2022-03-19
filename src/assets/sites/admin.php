@@ -4,7 +4,17 @@ $contact_upload_failed = false;
 $contact_uploaded = false;
 
 if(isset($_POST["addproduct"])){
-    var_dump($_POST);
+    if($_SESSION["admin"]){
+        $conn->Admin_AddProduct($_POST["productname"], $_POST["productprice"], $_POST["productcolors"], $_FILES["productpictures"]);
+        header("Location: " . $_SERVER["PHP_SELF"]);
+    }
+}
+
+if(isset($_POST["deleteproduct"])){
+    if($_SESSION["admin"]){
+        $conn->Admin_DeleteProduct($_POST["productid"]);
+        //header("Location: " . $_SERVER["PHP_SELF"]);
+    }
 }
 
 if(isset($_GET["logout"])){
@@ -79,7 +89,7 @@ include '../../navbar.php';
             <div style="display: flex; flex-direction: row;">
                 <div class="add-product-form" style="width: 100%">
                     <span class="title">Add Product</span>
-                    <form action="" method="POST">
+                    <form action="" method="POST" enctype="multipart/form-data">
                         <div class="contact-inputs-container">
                             <label for="inp-productname">Product Name</label>
                             <input type="text" id="inp-productname" name="productname" required>
@@ -90,17 +100,17 @@ include '../../navbar.php';
                         </div>
                         <div class="contact-inputs-container">
                             <label for="inp-colors">Product Colors</label>
-                            <select id="inp-colors" name="productcolors" multiple required>
+                            <select id="inp-colors" name="productcolors[]" multiple required size="<?php echo count($allcolors); ?>" style="overflow-y: auto; padding: 3px">
                                 <?php
                                 foreach ($allcolors as $color){
-                                    echo "<option value='" . $color["colorcode"] . "'>" . $color["color_tag"] . "</option>";
+                                    echo "<option style='padding: 3px' value='" . $color["PK_color"] . "'>" . strtoupper($color["color_tag"]) . "</option>";
                                 }
                                 ?>
                             </select>
                         </div>
                         <div class="contact-inputs-container">
                             <label for="inp-pictures">Product Pictures</label>
-                            <input id="inp-pictures" type="file" multiple required>
+                            <input id="inp-pictures" type="file" name="productpictures[]" multiple required accept="image/png, image/gif, image/jpeg">
                         </div>
                         <button type="submit" name="addproduct" class="normal-btn">Add Product</button>
                     </form>
@@ -113,6 +123,7 @@ include '../../navbar.php';
                             <th>Productname</th>
                             <th>Price</th>
                             <th>Status</th>
+                            <th>Actions</th>
                         </tr>
                         <?php
                         foreach ($products as $product){
@@ -122,10 +133,22 @@ include '../../navbar.php';
                                 <td><?php echo $product["productname"]?></td>
                                 <td><?php echo $product["price"]?></td>
                                 <td>
-                                    <form method="POST">
-                                        <select name="status">
-                                            <option><?php echo $product["status"]?></option>
-                                        </select>
+                                    <select name="status" onchange="SubmitChangeProductStatus(<?php echo $product["PK_product"]; ?>, this.value)">
+                                        <?php
+                                            foreach ($conn->Admin_get_enum_values("products", "status") as $statusval){
+                                                $selected = "";
+                                                if($statusval == $product["status"]) $selected = "selected";
+                                                ?>
+                                                    <option <?php echo $selected?> value="<?php echo $statusval; ?>"><?php echo strtoupper($statusval) ?></option>
+                                                <?php
+                                            }
+                                        ?>
+                                    </select>
+                                </td>
+                                <td>
+                                    <form action="" method="POST">
+                                        <input type="hidden" name="productid" value="<?php echo $product["PK_product"]?>">
+                                        <button type="submit" class="normal-btn" name="deleteproduct">Delete Product</button>
                                     </form>
                                 </td>
                             </tr>
@@ -152,7 +175,7 @@ include '../../navbar.php';
                                 <td><?php echo "#" . $contact["PK_contact"]?></td>
                                 <td><?php echo $contact["email"]?></td>
                                 <td><?php echo $contact["subject"]?></td>
-                                <td><?php echo $contact["text"]?></td>
+                                <td><button class="normal-btn" onclick="popup = CreatePopUpWindow('Contact Message: <?php echo $contact["subject"]; ?>'); popup.getElementsByClassName('popup-content')[0].innerHTML = '<?php echo $contact["text"]; ?>';">Show Message</button></td>
                             </tr>
                             <?php
                         }
@@ -174,6 +197,21 @@ include '../../navbar.php';
                     </table>
                 </div>
             </div>
+            <script>
+                function SubmitChangeProductStatus(ProductID, newstatus){
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function() {
+                        if (this.readyState == 4 && this.status == 200) {
+                            showMessage("success", "Successfully updated Product Status")
+                        } else if(this.readyState == 4){
+                            showMessage("error", "Something went wrong, please try again later")
+                        }
+                    };
+                    xhttp.open("POST", rootpath + "/actionmgr.php", true);
+                    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                    xhttp.send("action=adminchangeproductstatus&productid=" + ProductID + "&newstatus=" + newstatus);
+                }
+            </script>
             <?php
         }
     ?>

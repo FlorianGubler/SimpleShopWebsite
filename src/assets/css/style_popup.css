@@ -45,8 +45,8 @@
     position: relative;
     max-height: 80vh;
     max-width: 60vw;
-    overflow: auto;
     padding: 5px;
+    margin: 15px;
 }
 
 .popup-header span {
@@ -71,7 +71,6 @@
 }
 
 .popup-body {
-    padding: 15px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -85,6 +84,11 @@
     align-items: center;
     justify-content: center;
     width: 100%;
+    margin: 5px;
+    border: 1px solid #c4c4c4;
+    border-radius: 5px;
+    padding-bottom: 5px;
+    padding-top: 5px;
 }
 
 .popup-footer {

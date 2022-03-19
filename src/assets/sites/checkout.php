@@ -25,11 +25,11 @@ include '../../navbar.php';
                         <div class="col-50">
                             <h3>Address</h3>
                             <label for="fname">Full Name</label>
-                            <input type="text" id="fname" name="fullname" placeholder="Max Muster">
+                            <input type="text" id="fname" name="fullname" placeholder="Full Name">
                             <label for="email">Email</label>
-                            <input type="text" id="email" name="email" placeholder="maxmuster@example.com">
+                            <input type="text" id="email" name="email" placeholder="E-Mail">
                             <label for="adr">Address</label>
-                            <input type="text" id="adr" name="address" placeholder="Beispielstrasse 1">
+                            <input type="text" id="adr" name="address" placeholder="Address">
                             <label for="city">City</label>
                             <input type="text" id="city" name="city" placeholder="City">
 
@@ -55,15 +55,15 @@ include '../../navbar.php';
                                 <i class="fa-brands fa-cc-discover" style="color:orange;"></i>
                             </div>
                             <label for="cname">Name on Card</label>
-                            <input type="text" id="cname" name="cardname" placeholder="John More Doe">
+                            <input type="text" id="cname" name="cardname" placeholder="Name on Card">
                             <label for="ccnum">Credit card number</label>
                             <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444">
                             <label for="expmonth">Exp Month</label>
-                            <input type="text" id="expmonth" name="expmonth" placeholder="September">
+                            <input type="text" id="expmonth" name="expmonth" placeholder="Expiration Month">
                             <div class="row">
                                 <div class="col-50">
                                     <label for="expyear">Exp Year</label>
-                                    <input type="text" id="expyear" name="expyear" placeholder="2018">
+                                    <input type="text" id="expyear" name="Expiration Year" placeholder="2018">
                                 </div>
                                 <div class="col-50">
                                     <label for="cvv">CVV</label>

@@ -1,5 +1,4 @@
 function showMessage(type, text) {
-    console.log("test")
     container = document.getElementById("messages-container");
     msg = container.appendChild(document.createElement("div"));
     msg.className = "message";

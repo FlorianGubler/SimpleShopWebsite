@@ -5,8 +5,6 @@ $products = $conn->getAllProducts();
 $allActiveColors = $conn->getAllActiveColors();
 
 $maxminPrice = $conn->getMaxMinPrice();
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -64,7 +62,7 @@ $maxminPrice = $conn->getMaxMinPrice();
                     if ($product["status"] != "sold_out") {
                     ?>
                         <div class="product-addtocart-container">
-                            <button onclick="openColorChoose(JSON.parse(decodeURIComponent('<?php echo urlencode(json_encode($product['colors'])); ?>')))"><i class="fas fa-cart-arrow-down"></i></button>
+                            <button onclick="openColorChoose(JSON.parse(decodeURIComponent('<?php echo urlencode(json_encode($product['colors'])); ?>')), <?php echo $product["PK_product"]; ?>)"><i class="fas fa-cart-arrow-down"></i></button>
                         </div>
                     <?php
                     } else {
@@ -92,7 +90,7 @@ $maxminPrice = $conn->getMaxMinPrice();
                     <?php
                     foreach ($product["colors"] as $product_color) {
                     ?>
-                        <div class="product-color-coloritem" style="background-color: <?php echo $product_color; ?>;"></div>
+                        <div class="product-color-coloritem" style="background-color: <?php echo $product_color['colorcode']; ?>;"></div>
                     <?php
                     }
                     ?>
@@ -104,15 +102,23 @@ $maxminPrice = $conn->getMaxMinPrice();
         ?>
     </div>
     <script>
-        function openColorChoose(colors){
+        function openColorChoose(colors, productid){
             container = CreatePopUpWindow('Choose Product Color');
             content = container.getElementsByClassName("popup-content")[0];
+            label = content.appendChild(document.createElement("p"));
+            label.innerHTML = "Choose a Color";
+            label.className = "center-label";
             colorcontainer = content.appendChild(document.createElement("div"));
             colorcontainer.className = "colorcontainer";
             colors.forEach(color => {
-                colorcontainer.innerHTML += '<div class="product-color-coloritem cart-color-coloritem" style="background-color: ' + color + '"></div>';
+                coloritem = colorcontainer.appendChild(document.createElement("div"));
+                coloritem.className = "product-color-coloritem cart-color-coloritem cart-color-btn";
+                coloritem.style.backgroundColor = color['colorcode'];
+                coloritem.addEventListener("click", e => {
+                    addtocart(productid, color['PK_color']);
+                    container.remove();
+                });
             })
-            //addtocart(<?php echo $product['PK_product']; ?>, 1);
         }
     </script>
     <script src="<?php echo $rootpath; ?>/assets/js/slider.js"></script>
