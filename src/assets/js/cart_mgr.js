@@ -32,10 +32,10 @@ function addtocart(pkProduct, color) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            showMessage("success", "Successful added to Cart")
+            showMessage("success", TEXTE.addedtocart)
             reloadCart();
         } else if(this.readyState == 4){
-            showMessage("error", "Something went wrong, please try again later")
+            showMessage("error", TEXTE.error)
         }
     };
     xhttp.open("POST", rootpath + "/actionmgr.php", true);
@@ -46,10 +46,10 @@ function deleteItemFromCart(pkProduct, color) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            showMessage("success", "Successful removed from Cart")
+            showMessage("success", TEXTE.removedfromcart)
             reloadCart();
         } else if(this.readyState == 4){
-            showMessage("error", "Something went wrong, please try again later")
+            showMessage("error", TEXTE.error)
         }
     };
     xhttp.open("POST", rootpath + "/actionmgr.php", true);
@@ -62,7 +62,7 @@ function amountMinusCart(pkProduct, color) {
         if (this.readyState == 4 && this.status == 200) {
             reloadCart();
         } else if(this.readyState == 4){
-            showMessage("error", "Something went wrong, please try again later")
+            showMessage("error", TEXTE.error)
         }
     };
     xhttp.open("POST", rootpath + "/actionmgr.php", true);
@@ -75,7 +75,7 @@ function amountPlusCart(pkProduct, color) {
         if (this.readyState == 4 && this.status == 200) {
             reloadCart();
         } else if(this.readyState == 4){
-            showMessage("error", "Something went wrong, please try again later")
+            showMessage("error", TEXTE.error)
         }
     };
     xhttp.open("POST", rootpath + "/actionmgr.php", true);

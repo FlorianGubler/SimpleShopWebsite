@@ -14,7 +14,7 @@ $maxminPrice = $conn->getMaxMinPrice();
     include '../../header.php';
     ?>
     <link rel="stylesheet" href="<?php echo $rootpath ?>/assets/css/style_shop.css">
-    <title>Shop Gruppenprojekt - Shop</title>
+    <title><?php echo $texte->titel ?> - <?php echo $texte->shop ?></title>
 </head>
 
 <body>
@@ -28,12 +28,12 @@ $maxminPrice = $conn->getMaxMinPrice();
         <div class="searchbar-container">
             <div class="searchbar-content-container">
                 <p class="searchbar-icon-container"><i class="fas fa-search"></i></p>
-                <input type="text" id="products-searching" onkeyup="searchProducts();" placeholder="Search products...">
+                <input type="text" id="products-searching" onkeyup="searchProducts();" placeholder="<?php echo $texte->searchproducts ?>">
             </div>
             <div class="searchbar-filter-container">
                 <select class="filter-option" name="color" onchange="filterProducts();">
-                    <option disabled selected>Color</option>
-                    <option>None</option>
+                    <option disabled selected><?php echo $texte->color ?></option>
+                    <option><?php echo $texte->none ?></option>
                     <?php
                     foreach ($allActiveColors as $color) {
                     ?>
@@ -43,7 +43,7 @@ $maxminPrice = $conn->getMaxMinPrice();
                     ?>
                 </select>
                 <div class="price-filter-container">
-                    <label>Price</label>
+                    <label><?php echo $texte->price ?></label>
                     <div class="price-filter-slider-container">
                         <input id="price-filter-slider" step="0.01" type="range" min="<?php echo $maxminPrice["min_price"]; ?>" max="<?php echo $maxminPrice["max_price"]; ?>" value="<?php echo $maxminPrice["max_price"]; ?>" class="filter-option" name="price" oninput="document.getElementById('price-filter-slider-textval').innerHTML = 'CHF ' + this.value;" onchange="filterProducts();">
                         <p id="price-filter-slider-textval"></p>
@@ -53,7 +53,7 @@ $maxminPrice = $conn->getMaxMinPrice();
         </div>
         <?php
         echo "<div class='products-content-container'>";
-        echo "<div id='nothing-found'><p>Nothing found</p></div>";
+        echo "<div id='nothing-found'><p><?php echo $texte->nothingfound ?></p></div>";
         foreach ($products as $product) {
         ?>
             <div class="product-container">
@@ -68,7 +68,7 @@ $maxminPrice = $conn->getMaxMinPrice();
                     } else {
                     ?>
                         <div class="product-addtocart-container" style="width: 50px;">
-                            <p style="color: red; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">sold out</p>
+                            <p style="color: red; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"><?php echo $texte->soldout ?></p>
                         </div>
                     <?php
                     }
@@ -103,10 +103,10 @@ $maxminPrice = $conn->getMaxMinPrice();
     </div>
     <script>
         function openColorChoose(colors, productid){
-            container = CreatePopUpWindow('Choose Product Color');
+            container = CreatePopUpWindow(TEXTE.choosecolor);
             content = container.getElementsByClassName("popup-content")[0];
             label = content.appendChild(document.createElement("p"));
-            label.innerHTML = "Choose a Color";
+            label.innerHTML = TEXTE.choosecolor;
             label.className = "center-label";
             colorcontainer = content.appendChild(document.createElement("div"));
             colorcontainer.className = "colorcontainer";

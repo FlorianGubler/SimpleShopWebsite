@@ -11,7 +11,7 @@ $newestproducts = $conn->getNewestProducts(3);
     include 'header.php'
     ?>
     <link rel="stylesheet" href="<?php echo $rootpath ?>/assets/css/style_home.css">
-    <title>Gruppenprojekt - Home</title>
+    <title><?php echo $texte->titel ?> - <?php echo $texte->home ?></title>
 </head>
 
 <body>
@@ -23,7 +23,7 @@ $newestproducts = $conn->getNewestProducts(3);
             <div class="title-content">
                 <div class="title-content-text">
                     <h1>Willkommen, Bienvenue, Benvenuto</h1>
-                    <a href="<?php echo $rootpath; ?>/assets/sites/shop.php">SHOP</a>
+                    <a href="<?php echo $rootpath; ?>/assets/sites/shop.php"><?php echo strtoupper($texte->shop) ?></a>
                 </div>
                 <img src="assets/img/title_image.jpg">
             </div>
@@ -38,7 +38,7 @@ $newestproducts = $conn->getNewestProducts(3);
                             if ($product["status"] == "sold_out") {
                             ?>
                                 <div class="product-addtocart-container" style="width: 50px;">
-                                    <p style="color: red; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">sold out</p>
+                                    <p style="color: red; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"><?php echo $texte->soldout ?></p>
                                 </div>
 
                             <?php

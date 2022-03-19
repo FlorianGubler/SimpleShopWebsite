@@ -13,7 +13,7 @@
     include '../../header.php'
     ?>
     <link rel="stylesheet" href="<?php echo $rootpath ?>/assets/css/style_cart.css">
-    <title>Shop Gruppenprojekt - Checkout</title>
+    <title><?php echo $texte->titel ?> - <?php echo $texte->checkout ?></title>
 </head>
 
 <body>
@@ -27,23 +27,23 @@ include '../../navbar.php';
                 <form method="POST">
                     <div class="row">
                         <div class="col-50">
-                            <h3>Address</h3>
-                            <label for="fname">Full Name</label>
-                            <input type="text" id="fname" name="fullname" placeholder="Full Name" required>
-                            <label for="email">Email</label>
-                            <input type="text" id="email" name="email" placeholder="E-Mail" required>
-                            <label for="adr">Address</label>
-                            <input type="text" id="adr" name="address" placeholder="Address" required>
-                            <label for="city">City</label>
-                            <input type="text" id="city" name="city" placeholder="City" required>
+                            <h3><?php echo $texte->address ?></h3>
+                            <label for="fname"><?php echo $texte->fullname ?></label>
+                            <input type="text" id="fname" name="fullname" placeholder="<?php echo $texte->fullname ?>" required>
+                            <label for="email"><?php echo $texte->email ?></label>
+                            <input type="text" id="email" name="email" placeholder="<?php echo $texte->email ?>" required>
+                            <label for="adr"><?php echo $texte->address ?></label>
+                            <input type="text" id="adr" name="address" placeholder="<?php echo $texte->address ?>" required>
+                            <label for="city"><?php echo $texte->city ?></label>
+                            <input type="text" id="city" name="city" placeholder="<?php echo $texte->city ?>" required>
 
                             <div class="row">
                                 <div class="col-50">
-                                    <label for="state">State</label>
-                                    <input type="text" id="state" name="state" placeholder="State" required>
+                                    <label for="state"><?php echo $texte->state ?></label>
+                                    <input type="text" id="state" name="state" placeholder="<?php echo $texte->state ?>" required>
                                 </div>
                                 <div class="col-50">
-                                    <label for="zip">Postcode</label>
+                                    <label for="zip"><?php echo $texte->postcode ?></label>
                                     <input type="text" id="zip" name="postcode" placeholder="1234" required>
                                 </div>
                             </div>
@@ -51,32 +51,32 @@ include '../../navbar.php';
 
                         <div class="col-50">
                             <h3>Payment</h3>
-                            <label for="fname">Accepted Cards</label>
+                            <label for="fname"><?php echo $texte->acceptedcards ?></label>
                             <div class="icon-container">
                                 <i class="fa-brands fa-cc-visa" style="color:navy;"></i>
                                 <i class="fa-brands fa-cc-amex" style="color:blue;"></i>
                                 <i class="fa-brands fa-cc-mastercard" style="color:red;"></i>
                                 <i class="fa-brands fa-cc-discover" style="color:orange;"></i>
                             </div>
-                            <label for="cname">Name on Card</label>
-                            <input type="text" id="cname" name="cardname" placeholder="Name on Card">
-                            <label for="ccnum">Credit card number</label>
+                            <label for="cname"><?php echo $texte->nameoncard ?></label>
+                            <input type="text" id="cname" name="cardname" placeholder="<?php echo $texte->nameoncard ?>">
+                            <label for="ccnum"><?php echo $texte->cardnumber ?></label>
                             <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444">
-                            <label for="expmonth">Exp Month</label>
-                            <input type="text" id="expmonth" name="expmonth" placeholder="Expiration Month">
+                            <label for="expmonth"><?php echo $texte->expirationmonth ?></label>
+                            <input type="text" id="expmonth" name="expmonth" placeholder="<?php echo $texte->expirationmonth ?>">
                             <div class="row">
                                 <div class="col-50">
-                                    <label for="expyear">Exp Year</label>
-                                    <input type="text" id="expyear" name="Expiration Year" placeholder="2018">
+                                    <label for="expyear"><?php echo $texte->expirationyear ?></label>
+                                    <input type="text" id="expyear" name="<?php echo $texte->expirationyear ?>" placeholder="2018">
                                 </div>
                                 <div class="col-50">
                                     <label for="cvv">CVV</label>
-                                    <input type="text" id="cvv" name="cvv" placeholder="352">
+                                    <input type="text" id="cvv" name="CVV" placeholder="352">
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <input type="submit" name="checkout" class="btn">
+                    <button type="submit" name="checkout" class="btn"><?php echo $texte->send ?></button>
                 </form>
             </div>
         </div>

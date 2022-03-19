@@ -24,7 +24,7 @@
     include '../../header.php'
     ?>
     <link rel="stylesheet" href="<?php echo $rootpath?>/assets/css/style_contact.css">
-    <title>Shop Gruppenprojekt - Contact</title>
+    <title><?php echo $texte->titel ?> - <?php echo $texte->contact ?></title>
 </head>
 
 <body>
@@ -35,21 +35,21 @@
         <div class="contact-form-container">
             <form action="" method="post">
                 <div class="contact-inputs-container">
-                    <label for="contact-input-email">Email</label>
+                    <label for="contact-input-email"><?php echo $texte->email ?></label>
                     <input id="contact-input-email" type="email" name="contact-email" placeholder="max@example.net" required>
                 </div>
 
                 <div class="contact-inputs-container">
-                    <label for="contact-input-subject">Subject</label>
-                    <input id="contact-input-subject" type="text" maxlength="255" name="contact-subject" placeholder="I have a question about..." required>
+                    <label for="contact-input-subject"><?php echo $texte->subject ?></label>
+                    <input id="contact-input-subject" type="text" maxlength="255" name="contact-subject" placeholder="<?php echo $texte->subject ?>" required>
                 </div>
 
                 <div class="contact-inputs-container">
-                    <label for="contact-input-text">Request / Question</label>
-                    <textarea id="contact-input-text" type="text" name="contact-text" placeholder="My question is..." required></textarea>
+                    <label for="contact-input-text"><?php echo $texte->question ?></label>
+                    <textarea id="contact-input-text" name="contact-text" placeholder="<?php echo $texte->question ?>" required></textarea>
                 </div>
 
-                <button type="submit" name="contact-submit">Submit</button>
+                <button type="submit" name="contact-submit"><?php echo $texte->send ?></button>
             </form>
         </div>
         <?php

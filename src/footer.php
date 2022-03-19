@@ -1,16 +1,16 @@
 <div class="footer-container">
     <ul>
         <li class="footer-ul-item">
-            <a href="<?php echo $rootpath ?>/index.php">Home</a>
+            <a href="<?php echo $rootpath ?>/index.php"><?php echo $texte->home ?></a>
         </li>
         <li class="footer-ul-item">
-            <a href="<?php echo $rootpath ?>/assets/sites/shop.php">Shop</a>
+            <a href="<?php echo $rootpath ?>/assets/sites/shop.php"><?php echo $texte->shop ?></a>
         </li>
         <li class="footer-ul-item">
-            <a href="<?php echo $rootpath ?>/assets/sites/story.php">Background Story</a>
+            <a href="<?php echo $rootpath ?>/assets/sites/story.php"><?php echo $texte->story ?></a>
         </li>
         <li class="footer-ul-item">
-            <a href="<?php echo $rootpath ?>/assets/sites/contact.php">Contact</a>
+            <a href="<?php echo $rootpath ?>/assets/sites/contact.php"><?php echo $texte->contact ?></a>
         </li>
     </ul>
     <div class="footer-socialmedia-container">
@@ -39,11 +39,11 @@
         <?php
             if(!$_SESSION["admin"]){
                 ?>
-                    <a class="footer-login" href="<?php echo $rootpath ?>/assets/sites/admin.php">Login</a>
+                    <a class="footer-login" href="<?php echo $rootpath ?>/assets/sites/admin.php"><?php echo $texte->login ?></a>
                 <?php
             } else{
                 ?>
-                    <a class="footer-login" href="<?php echo $rootpath ?>/assets/sites/admin.php?logout=true">Logout</a>
+                    <a class="footer-login" href="<?php echo $rootpath ?>/assets/sites/admin.php?logout=true"><?php echo $texte->logout ?></a>
                 <?php
             }
         ?>

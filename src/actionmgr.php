@@ -62,7 +62,7 @@ function CartAmountMinus($pkProduct, $color){
 
 function changeLanguage($lang){
     global $rootpath;
-    if(file_exists($_SERVER["DOCUMENT_ROOT"] . "/assets/language/" . $lang . ".php")){
+    if(file_exists($_SERVER["DOCUMENT_ROOT"] . "/assets/language/" . $lang . ".json")){
         $_SESSION["lang"] = $lang;
     }
 }

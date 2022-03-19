@@ -42,7 +42,6 @@ if(!isset($_SESSION["lang"])){
 }
 
 //Include Language File
-require_once("assets/language/" . $_SESSION["lang"] . ".php");
+$texte = json_decode(file_get_contents($_SERVER["DOCUMENT_ROOT"] . "/assets/language/" . $_SESSION["lang"] . ".json"));
 
-//TODO: Language Support
 //TODO: Payment

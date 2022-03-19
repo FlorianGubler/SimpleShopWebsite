@@ -49,7 +49,15 @@ $shippingprice = 5;
                                 </div>
                             </div>
                             <div class="price-status-container"><p class="priceTag">CHF <?php echo $cartproduct['price'] * $cartobj[1]; ?></p>
-                                <p class="statusTag" style="color: <?php if($cartproduct['status'] == 'available') {echo 'green';} else {echo 'red';} ?>;"><?php echo $cartproduct['status']; ?></p>
+                                <p class="statusTag" style="color: <?php if($cartproduct['status'] == 'available') {echo 'green';} else {echo 'red';} ?>;">
+                                    <?php
+                                        if($cartproduct['status'] == "available"){
+                                            echo $texte->available;
+                                        } else if($cartproduct['status'] == "sold_out"){
+                                            echo $texte->soldout;
+                                        }
+                                    ?>
+                                </p>
                             </div>
                         </div>
                     </li>
@@ -65,15 +73,15 @@ $shippingprice = 5;
     <li id="cart-calc-price" class="cart-calc-price">
         <table>
             <tbody><tr>
-                <th>Price products: </th>
+                <th><?php echo $texte->productendprice ?>: </th>
                 <td>CHF <?php echo $endprice; ?></td>
             </tr>
             <tr>
-                <th>Shipping: </th>
+                <th><?php echo $texte->shippingprice ?>: </th>
                 <td>CHF <?php echo $shippingprice; ?></td>
             </tr>
             <tr>
-                <th>Endprice: </th>
+                <th><?php echo $texte->endprice ?>: </th>
                 <td>CHF <?php echo $endprice + $shippingprice; ?></td>
             </tr>
             </tbody>
@@ -82,7 +90,7 @@ $shippingprice = 5;
     <?php
     } else{
         ?>
-        <li style="width: 100%; text-align: center; margin-top: 10px" class="cart-empty">Cart is empty</li>
+        <li style="width: 100%; text-align: center; margin-top: 10px" class="cart-empty"><?php echo $texte->cartempty ?></li>
         <?php
     }
     ?>

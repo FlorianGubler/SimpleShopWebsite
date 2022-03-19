@@ -7,6 +7,7 @@ if (isset($_POST['getjsonofproduct'])) {
 ?>
 <script>
     const rootpath = "<?php echo $rootpath; ?>";
+    const TEXTE = JSON.parse('<?php echo json_encode($texte) ?>');
 </script>
 
 <div class="expand-navbar">
@@ -37,22 +38,22 @@ if (isset($_POST['getjsonofproduct'])) {
 <div id="navbar" class="navbar-container">
     <ul>
         <li class="navbar-ul-item">
-            <a href="<?php echo $rootpath ?>/index.php">HOME</a>
+            <a href="<?php echo $rootpath ?>/index.php"><?php echo strtoupper($texte->home); ?></a>
         </li>
         <li class="navbar-ul-item">
-            <a href="<?php echo $rootpath ?>/assets/sites/shop.php">SHOP</a>
+            <a href="<?php echo $rootpath ?>/assets/sites/shop.php"><?php echo strtoupper($texte->shop); ?></a>
         </li>
         <li class="navbar-ul-item">
-            <a href="<?php echo $rootpath ?>/assets/sites/story.php">OUR STORY</a>
+            <a href="<?php echo $rootpath ?>/assets/sites/story.php"><?php echo strtoupper($texte->story); ?></a>
         </li>
         <li class="navbar-ul-item">
-            <a href="<?php echo $rootpath ?>/assets/sites/contact.php">CONTACT</a>
+            <a href="<?php echo $rootpath ?>/assets/sites/contact.php"><?php echo strtoupper($texte->contact); ?></a>
         </li>
         <?php
             if($_SESSION["admin"]){
                 ?>
                     <li class="navbar-ul-item">
-                        <a href="<?php echo $rootpath ?>/assets/sites/admin.php">ADMIN</a>
+                        <a href="<?php echo $rootpath ?>/assets/sites/admin.php"><?php echo strtoupper($texte->admin); ?></a>
                     </li>
                 <?php
             }
@@ -61,12 +62,12 @@ if (isset($_POST['getjsonofproduct'])) {
 </div>
 <div id="cart-container">
     <div class="cart-content-container">
-        <p class="cart-title">Cart <i class="fas fa-shopping-cart"></i></p>
+        <p class="cart-title"><?php echo $texte->cart; ?> <i class="fas fa-shopping-cart"></i></p>
         <button class="close-cart-btn" onclick="closecart();"><i class="fas fa-times"></i></button>
         <div id="cart-content-container">
 
         </div>
-        <button class="cart-checkout-btn" onclick="location.href = rootpath + '/assets/sites/checkout.php'"><i class="fa fa-shopping-cart"></i> Checkout</button>
+        <button class="cart-checkout-btn" onclick="location.href = rootpath + '/assets/sites/checkout.php'"><i class="fa fa-shopping-cart"></i> <?php echo $texte->checkout; ?></button>
     </div>
 </div>
 <div id="messages-container"></div>
