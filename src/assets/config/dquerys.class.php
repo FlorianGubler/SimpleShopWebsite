@@ -231,4 +231,51 @@ class DBquery
         $enum = explode("','", $matches[1]);
         return $enum;
     }
+
+    function CreateOrder($fullname, $email, $address, $city, $state, $postcode, $cart){
+        $fullname = $this->dbconn->real_escape_string($fullname);
+        $email = $this->dbconn->real_escape_string($email);
+        $address = $this->dbconn->real_escape_string($address);
+        $city = $this->dbconn->real_escape_string($city);
+        $state = $this->dbconn->real_escape_string($state);
+        $postcode = $this->dbconn->real_escape_string($postcode);
+        $sql = "INSERT INTO userdata (fullname, email, address, city, state, postcode) VALUES ('$fullname', '$email', '$address', '$city', '$state', '$postcode');";
+        $this->dbconn->query($sql);
+        $userdataid = $this->dbconn->insert_id;
+
+        $sql = "INSERT INTO orders (FK_userdata) VALUES ($userdataid);";
+        $this->dbconn->query($sql);
+        $orderid = $this->dbconn->insert_id;
+
+        foreach ($cart as $cartobj){
+            $sql = "INSERT INTO order_products (FK_product, FK_order, FK_color, amount) VALUES (" . $cartobj[0] . ", $orderid, " . $cartobj[2] . ", " . $cartobj[1] . ");";
+            $this->dbconn->query($sql);
+        }
+    }
+
+    function GetProductsFromOrder($pkOrder){
+        $products = array();
+        $sql = "SELECT * FROM order_products JOIN products ON order_products.FK_product = products.PK_product JOIN shop_colors ON order_products.FK_color = shop_colors.PK_color WHERE FK_order=$pkOrder";
+        $qry = $this->dbconn->query($sql);
+        while ($result = $qry->fetch_assoc()) {
+            array_push($products, $result);
+        }
+        return $products;
+    }
+
+    function Admin_getAllOrders(){
+        $orders = array();
+        $sql = "SELECT * FROM orders JOIN userdata ON orders.FK_userdata = userdata.PK_userdata";
+        $qry = $this->dbconn->query($sql);
+        while ($result = $qry->fetch_assoc()) {
+            $result["products"] = $this->GetProductsFromOrder($result["PK_order"]);
+            array_push($orders, $result);
+        }
+        return $orders;
+    }
+
+    function Admin_ChangeOrderStatus($orderID, $newstatus){
+        $sql = "UPDATE orders SET status = '$newstatus' WHERE PK_order = $orderID;";
+        return $this->dbconn->query($sql);
+    }
 }

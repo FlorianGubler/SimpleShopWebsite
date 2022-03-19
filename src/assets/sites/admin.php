@@ -84,6 +84,7 @@ include '../../navbar.php';
             $contacts = $conn->getCustomerRequest();
             $allcolors = $conn->getAllColors();
             $products = $conn->getAllProducts();
+            $orders = $conn->Admin_getAllOrders();
             ?>
             <h3>Admin Tools</h3>
             <div style="display: flex; flex-direction: row;">
@@ -184,20 +185,66 @@ include '../../navbar.php';
                 </div>
                 <div class="table-container">
                     <span class="title">Orders</span>
-                    <table>
+                    <table class="table-small">
                         <tr>
                             <th>Request-ID</th>
                             <th>Adress</th>
-                            <th>Product</th>
+                            <th>User</th>
                             <th>Status</th>
+                            <th>Product</th>
                         </tr>
                         <?php
-
+                        foreach ($orders as $order){
+                            ?>
+                            <tr>
+                                <td><?php echo "#" . $order["PK_order"]?></td>
+                                <td><?php echo $order["address"] . ", " . $order["state"] . ", " . $order["city"] . " " .  $order["postcode"]; ?></td>
+                                <td><?php echo $order["fullname"] . " (" . $order["email"] . ")"; ?></td>
+                                <td>
+                                    <select name="status" onchange="SubmitChangeOrderStatus(<?php echo $order["PK_order"]; ?>, this.value)">
+                                        <?php
+                                        foreach ($conn->Admin_get_enum_values("orders", "status") as $statusval){
+                                            $selected = "";
+                                            if($statusval == $order["status"]) $selected = "selected";
+                                            ?>
+                                            <option <?php echo $selected?> value="<?php echo $statusval; ?>"><?php echo strtoupper($statusval) ?></option>
+                                            <?php
+                                        }
+                                        ?>
+                                    </select>
+                                </td>
+                                <td>
+                                    <button class="normal-btn" onclick="ShowHiddenRow(<?php echo $order["PK_order"]; ?>);">Show Ordered Products</button>
+                                </td>
+                            </tr>
+                            <tr id="hidden-row-<?php echo $order["PK_order"]; ?>" style="display: none">
+                                <td colspan="5">
+                                    <div style="display: flex; flex-direction: row; align-items: center; flex-wrap: wrap; width: 100%">
+                                        <?php
+                                        foreach ($order["products"] as $orderproduct){
+                                            ?>
+                                            <div class="order-list-product">
+                                                <span>Product: <?php echo "#" . $orderproduct["PK_product"] . " - " . $orderproduct["productname"] ?></span>
+                                                <span>Color: <?php echo $orderproduct["color_tag"] ?></span>
+                                                <span>Amount: <?php echo $orderproduct["amount"] ?></span>
+                                            </div>
+                                            <?php
+                                        }
+                                        ?>
+                                    </div>
+                                </td>
+                            </tr>
+                            <?php
+                        }
                         ?>
                     </table>
                 </div>
             </div>
             <script>
+                function ShowHiddenRow(id){
+                    el = document.getElementById('hidden-row-' + id);
+                    el.style.display == "table-row" ? el.style.display = "none" : el.style.display = "table-row";
+                }
                 function SubmitChangeProductStatus(ProductID, newstatus){
                     var xhttp = new XMLHttpRequest();
                     xhttp.onreadystatechange = function() {
@@ -210,6 +257,19 @@ include '../../navbar.php';
                     xhttp.open("POST", rootpath + "/actionmgr.php", true);
                     xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
                     xhttp.send("action=adminchangeproductstatus&productid=" + ProductID + "&newstatus=" + newstatus);
+                }
+                function SubmitChangeOrderStatus(OrderID, newstatus){
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function() {
+                        if (this.readyState == 4 && this.status == 200) {
+                            showMessage("success", "Successfully updated Order Status")
+                        } else if(this.readyState == 4){
+                            showMessage("error", "Something went wrong, please try again later")
+                        }
+                    };
+                    xhttp.open("POST", rootpath + "/actionmgr.php", true);
+                    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                    xhttp.send("action=adminchangeorderstatus&orderid=" + OrderID + "&newstatus=" + newstatus);
                 }
             </script>
             <?php

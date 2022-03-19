@@ -44,7 +44,6 @@ if(!isset($_SESSION["lang"])){
 //Include Language File
 require_once("assets/language/" . $_SESSION["lang"] . ".php");
 
-//TODO: Ordering
 //TODO: Language Support
 //TODO: Payment
 //TODO: CSS Optimization

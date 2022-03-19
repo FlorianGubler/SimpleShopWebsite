@@ -8,7 +8,8 @@ if(isset($_POST["action"]) || isset($_GET["action"])){
         case "cartamountminus": CartAmountMinus($method["productid"], $method["productcolor"]); break;
         case "cartamountplus": CartAmountPlus($method["productid"], $method["productcolor"]); break;
         case "changelanguage": changeLanguage(strtolower($method["newlang"])); break;
-        case "adminchangeproductstatus": echo $conn->Admin_ChangeProductStatus($method["productid"], $method["newstatus"]); breaK;
+        case "adminchangeproductstatus": echo $conn->Admin_ChangeProductStatus($method["productid"], $method["newstatus"]); break;
+        case "adminchangeorderstatus": echo $conn->Admin_ChangeOrderStatus($method["orderid"], $method["newstatus"]); breaK;
         default: throw new Exception("Unknown Action");
     }
     if(isset($method["redirect"])){

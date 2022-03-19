@@ -1,5 +1,9 @@
 <?php
-
+    include "../../config.php";
+    if(isset($_POST["checkout"])){
+        $conn->CreateOrder($_POST["fullname"], $_POST["email"], $_POST["address"], $_POST["city"], $_POST["state"], $_POST["postcode"], $_SESSION["cart"]);
+        //Add Payment
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,27 +24,27 @@ include '../../navbar.php';
     <div class="row">
         <div class="col-75">
             <div class="container">
-                <form action="<?php echo $rootpath; ?>/src/actionmgr.php.php" method="POST">
+                <form method="POST">
                     <div class="row">
                         <div class="col-50">
                             <h3>Address</h3>
                             <label for="fname">Full Name</label>
-                            <input type="text" id="fname" name="fullname" placeholder="Full Name">
+                            <input type="text" id="fname" name="fullname" placeholder="Full Name" required>
                             <label for="email">Email</label>
-                            <input type="text" id="email" name="email" placeholder="E-Mail">
+                            <input type="text" id="email" name="email" placeholder="E-Mail" required>
                             <label for="adr">Address</label>
-                            <input type="text" id="adr" name="address" placeholder="Address">
+                            <input type="text" id="adr" name="address" placeholder="Address" required>
                             <label for="city">City</label>
-                            <input type="text" id="city" name="city" placeholder="City">
+                            <input type="text" id="city" name="city" placeholder="City" required>
 
                             <div class="row">
                                 <div class="col-50">
                                     <label for="state">State</label>
-                                    <input type="text" id="state" name="state" placeholder="State">
+                                    <input type="text" id="state" name="state" placeholder="State" required>
                                 </div>
                                 <div class="col-50">
                                     <label for="zip">Postcode</label>
-                                    <input type="text" id="zip" name="zip" placeholder="1234">
+                                    <input type="text" id="zip" name="postcode" placeholder="1234" required>
                                 </div>
                             </div>
                         </div>
@@ -72,7 +76,7 @@ include '../../navbar.php';
                             </div>
                         </div>
                     </div>
-                    <input type="submit" value="Checkout" class="btn">
+                    <input type="submit" name="checkout" class="btn">
                 </form>
             </div>
         </div>
