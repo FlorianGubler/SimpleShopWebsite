@@ -84,7 +84,7 @@ $maxminPrice = $conn->getMaxMinPrice();
                 </div>
                 <div class="product-data-container">
                     <p class="product-productname"><?php echo $product["productname"]; ?></p>
-                    <p class="product-productprice">CHF <?php echo $product["price"]; ?>.-</p>
+                    <p class="product-productprice">CHF <?php echo $product["price"]; ?></p>
                 </div>
                 <div class="product-color-container">
                     <?php

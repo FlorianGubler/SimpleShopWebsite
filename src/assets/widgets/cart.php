@@ -48,7 +48,7 @@ $shippingprice = 5;
                                     </div>
                                 </div>
                             </div>
-                            <div class="price-status-container"><p class="priceTag">CHF <?php echo $cartproduct['price'] * $cartobj[1]; ?>.-</p>
+                            <div class="price-status-container"><p class="priceTag">CHF <?php echo $cartproduct['price'] * $cartobj[1]; ?></p>
                                 <p class="statusTag" style="color: <?php if($cartproduct['status'] == 'available') {echo 'green';} else {echo 'red';} ?>;"><?php echo $cartproduct['status']; ?></p>
                             </div>
                         </div>
@@ -66,15 +66,15 @@ $shippingprice = 5;
         <table>
             <tbody><tr>
                 <th>Price products: </th>
-                <td>CHF <?php echo $endprice; ?>.-</td>
+                <td>CHF <?php echo $endprice; ?></td>
             </tr>
             <tr>
                 <th>Shipping: </th>
-                <td>CHF <?php echo $shippingprice; ?>.-</td>
+                <td>CHF <?php echo $shippingprice; ?></td>
             </tr>
             <tr>
                 <th>Endprice: </th>
-                <td>CHF <?php echo $endprice + $shippingprice; ?>.-</td>
+                <td>CHF <?php echo $endprice + $shippingprice; ?></td>
             </tr>
             </tbody>
         </table>
