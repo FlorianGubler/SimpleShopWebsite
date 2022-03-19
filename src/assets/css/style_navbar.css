@@ -341,3 +341,11 @@ left: 50%;
     text-align: center;
     padding: 5px;
 }
+.icon-btn{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+.icon-btn:hover{
+    opacity: 0.7;
+}

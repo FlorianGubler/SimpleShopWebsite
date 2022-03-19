@@ -46,4 +46,3 @@ require_once("assets/language/" . $_SESSION["lang"] . ".php");
 
 //TODO: Language Support
 //TODO: Payment
-//TODO: CSS Optimization

@@ -2,10 +2,18 @@
 include "../../config.php";
 $contact_upload_failed = false;
 $contact_uploaded = false;
+$failed = false;
 
 if(isset($_POST["addproduct"])){
     if($_SESSION["admin"]){
         $conn->Admin_AddProduct($_POST["productname"], $_POST["productprice"], $_POST["productcolors"], $_FILES["productpictures"]);
+        header("Location: " . $_SERVER["PHP_SELF"]);
+    }
+}
+
+if(isset($_POST["addcolor"])){
+    if($_SESSION["admin"]){
+        $conn->Admin_AddColor(strtolower($_POST["colortag"]), $_POST["colorcode"]);
         header("Location: " . $_SERVER["PHP_SELF"]);
     }
 }
@@ -100,7 +108,10 @@ include '../../navbar.php';
                             <input type="number" step="0.01" id="inp-price" name="productprice" required>
                         </div>
                         <div class="contact-inputs-container">
-                            <label for="inp-colors">Product Colors</label>
+                            <div style="display: flex; flex-direction: row; align-items: center; justify-content: left; width: 100%">
+                                <label for="inp-colors">Product Colors</label>
+                                <button class="icon-btn" type="button" style="margin-left: 5px" onclick="OpenAddColorWindow();"><i class="fa-solid fa-plus"></i></button>
+                            </div>
                             <select id="inp-colors" name="productcolors[]" multiple required size="<?php echo count($allcolors); ?>" style="overflow-y: auto; padding: 3px">
                                 <?php
                                 foreach ($allcolors as $color){
@@ -270,6 +281,31 @@ include '../../navbar.php';
                     xhttp.open("POST", rootpath + "/actionmgr.php", true);
                     xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
                     xhttp.send("action=adminchangeorderstatus&orderid=" + OrderID + "&newstatus=" + newstatus);
+                }
+                function OpenAddColorWindow(){
+                    container = CreatePopUpWindow("Create New Color");
+                    content = container.getElementsByClassName("popup-content")[0];
+                    form = content.appendChild(document.createElement("form"));
+                    form.method = "POST";
+                    form.className = "form-column";
+                    colortaginp = form.appendChild(document.createElement("input"));
+                    colortaginp.placeholder = "Color Tag";
+                    colortaginp.name = "colortag";
+                    colortaginp.type = "text";
+                    colortaginp.required = "true";
+                    colorcodecontainer = form.appendChild(document.createElement("div"));
+                    colorcodecontainer.className = "colorcodecontainer";
+                    colorcodeinplabel = colorcodecontainer.appendChild(document.createElement("label"));
+                    colorcodeinplabel.innerHTML = "Color ";
+                    colorcodeinp = colorcodecontainer.appendChild(document.createElement("input"));
+                    colorcodeinp.type = "color";
+                    colorcodeinp.name = "colorcode";
+                    colorcodeinp.required = "true";
+                    submitbtn = form.appendChild(document.createElement("button"));
+                    submitbtn.type = "submit";
+                    submitbtn.innerHTML = "Create Color";
+                    submitbtn.name = "addcolor";
+                    submitbtn.className = "normal-btn";
                 }
             </script>
             <?php

@@ -278,4 +278,9 @@ class DBquery
         $sql = "UPDATE orders SET status = '$newstatus' WHERE PK_order = $orderID;";
         return $this->dbconn->query($sql);
     }
+
+    function Admin_AddColor($colorTag, $colorCode){
+        $sql = "INSERT INTO shop_colors (color_tag, colorcode) VALUES ('$colorTag', '$colorCode');";
+        return $this->dbconn->query($sql);
+    }
 }
