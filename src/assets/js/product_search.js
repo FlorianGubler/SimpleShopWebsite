@@ -4,17 +4,16 @@ function searchProducts() {
     searching = document.getElementById("products-searching").value;
     products = document.getElementsByClassName("product-container");
     for (let i = 0; i < products.length; i++) {
-        if (products[i].getAttributeNode("excluded_from_priceFilter") == null && products[i].getAttributeNode("excluded_from_colorFilter") == null) {
+        if (products[i].getAttribute("excluded_from_priceFilter") == null && products[i].getAttribute("excluded_from_colorFilter") == null) {
             if (products[i].getElementsByClassName("product-data-container")[0].getElementsByClassName("product-productname")[0].innerHTML.toLowerCase().includes(searching.toLowerCase())) {
                 products[i].style.display = "block";
-                if (products[i].getAttributeNode("excluded_from_Search") != null && products[i].getAttributeNode("excluded_from_Search") != false) {
+                if (products[i].getAttribute("excluded_from_Search") != null && products[i].getAttribute("excluded_from_Search") != false) {
                     products[i].removeAttributeNode(products[i].getAttributeNode("excluded_from_Search"));
                 }
             }
             else {
                 products[i].style.display = "none";
-                excludedFromSearch = document.createAttribute("excluded_from_Search");
-                products[i].setAttributeNode(excludedFromSearch);
+                products[i].setAttribute("excluded_from_Search", "true");
             }
         }
         else {
@@ -43,7 +42,7 @@ function filterProducts() {
     filterColor();
     filterPrice();
     searchProducts();
-    if (countDisplayedProducts() == 0) {
+    if (countDisplayedProducts() === 0) {
         document.getElementById("nothing-found").style.display = "block";
     }
     else {

@@ -32,7 +32,7 @@ $maxminPrice = $conn->getMaxMinPrice();
             </div>
             <div class="searchbar-filter-container">
                 <select id="filter-color" name="color" onchange="filterProducts();">
-                    <option disabled selected><?php echo $texte->color ?></option>
+                    <option disabled selected value="-1"><?php echo $texte->color ?></option>
                     <option value="-1"><?php echo $texte->none ?></option>
                     <?php
                     foreach ($allActiveColors as $color) {
@@ -53,7 +53,7 @@ $maxminPrice = $conn->getMaxMinPrice();
         </div>
         <?php
         echo "<div class='products-content-container'>";
-        echo "<div id='nothing-found'><p><?php echo $texte->nothingfound ?></p></div>";
+        echo "<div id='nothing-found'><p>$texte->nothingfound</p></div>";
         foreach ($products as $product) {
         ?>
             <div class="product-container" productprice="<?php echo $product["price"]; ?>" productcolors="<?php echo htmlspecialchars(json_encode($product["colors"], ENT_QUOTES))?>">
