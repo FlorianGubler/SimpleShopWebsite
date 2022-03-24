@@ -31,9 +31,9 @@ $maxminPrice = $conn->getMaxMinPrice();
                 <input type="text" id="products-searching" onkeyup="searchProducts();" placeholder="<?php echo $texte->searchproducts ?>">
             </div>
             <div class="searchbar-filter-container">
-                <select class="filter-option" name="color" onchange="filterProducts();">
+                <select id="filter-color" name="color" onchange="filterProducts();">
                     <option disabled selected><?php echo $texte->color ?></option>
-                    <option><?php echo $texte->none ?></option>
+                    <option value="-1"><?php echo $texte->none ?></option>
                     <?php
                     foreach ($allActiveColors as $color) {
                     ?>
@@ -56,7 +56,7 @@ $maxminPrice = $conn->getMaxMinPrice();
         echo "<div id='nothing-found'><p><?php echo $texte->nothingfound ?></p></div>";
         foreach ($products as $product) {
         ?>
-            <div class="product-container">
+            <div class="product-container" productprice="<?php echo $product["price"]; ?>" productcolors="<?php echo htmlspecialchars(json_encode($product["colors"], ENT_QUOTES))?>">
                 <div id="product-<?php echo $product["PK_product"]; ?>" class="product-image-container">
                     <?php
                     if ($product["status"] != "sold_out") {
@@ -68,7 +68,7 @@ $maxminPrice = $conn->getMaxMinPrice();
                     } else {
                     ?>
                         <div class="product-addtocart-container" style="width: 50px;">
-                            <p style="color: red; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"><?php echo $texte->soldout ?></p>
+                            <p style="color: red; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-break: anywhere;"><?php echo $texte->soldout ?></p>
                         </div>
                     <?php
                     }

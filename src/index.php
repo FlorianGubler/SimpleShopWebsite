@@ -38,7 +38,7 @@ $newestproducts = $conn->getNewestProducts(3);
                             if ($product["status"] == "sold_out") {
                             ?>
                                 <div class="product-addtocart-container" style="width: 50px;">
-                                    <p style="color: red; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"><?php echo $texte->soldout ?></p>
+                                    <p style="color: red; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-break: anywhere;"><?php echo $texte->soldout ?></p>
                                 </div>
 
                             <?php

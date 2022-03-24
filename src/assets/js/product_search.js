@@ -51,114 +51,42 @@ function filterProducts() {
     }
 }
 function filterColor() {
-    filters = document.getElementsByClassName("filter-option");
-    for (let i = 0; i < filters.length; i++) {
-        if (String(filters[i].value) != "None" && String(filters[i].value) != "Color") {
-            products = document.getElementsByClassName("product-container");
-            for (let b = 0; b < products.length; b++) {
-                if (products[b].getAttributeNode("excluded_from_priceFilter") == null && products[b].getAttributeNode("excluded_from_Search") == null) {
-                    if (filters[i].name == "color") {
-                        coloritems = products[b].getElementsByClassName("product-color-container")[0].getElementsByClassName("product-color-coloritem");
-                        for (let c = 0; c < coloritems.length; c++) {
-                            if (rgb2hex(coloritems[c].style.backgroundColor) == getHashCodeOfColorTag(filters[i].value)) {
-                                products[b].style.display = "block";
-                                if (products[b].getAttributeNode("excluded_from_colorFilter") != null && products[b].getAttributeNode("excluded_from_colorFilter") != false) {
-                                    products[b].removeAttributeNode(products[b].getAttributeNode("excluded_from_colorFilter"));
-                                }
-                                break;
-                            }
-                            else {
-                                products[b].style.display = "none";
-                                excludedFromColorFilter = document.createAttribute("excluded_from_colorFilter");
-                                products[b].setAttributeNode(excludedFromColorFilter);
-                            }
-                        }
-                    }
-                }
-                else {
-                    products[b].style.display = "none";
-                }
+    colorfilter = document.getElementById("filter-color");
+    products = document.getElementsByClassName("product-container");
+    for (let b = 0; b < products.length; b++) {
+        if (products[b].getAttribute("excluded_from_priceFilter") == null && products[b].getAttribute("excluded_from_Search") == null) {
+            if (colorarrcontains(JSON.parse(products[b].getAttribute("productcolors")), colorfilter.value) || colorfilter.value == -1) {
+                products[b].style.display = "block";
+                products[b].removeAttribute("excluded_from_colorFilter");
             }
-        }
-        else {
-            for (let b = 0; b < products.length; b++) {
-                if (filters[i].name == "color") {
-                    products[b].style.display = "block";
-                    if (products[b].getAttributeNode("excluded_from_colorFilter") != null && products[b].getAttributeNode("excluded_from_colorFilter") != false) {
-                        products[b].removeAttributeNode(products[b].getAttributeNode("excluded_from_colorFilter"));
-                    }
-                }
+            else {
+                products[b].style.display = "none";
+                products[b].setAttribute("excluded_from_colorFilter", "true");
             }
         }
     }
 }
 function filterPrice() {
-    filters = document.getElementsByClassName("filter-option");
-    for (let i = 0; i < filters.length; i++) {
-        products = document.getElementsByClassName("product-container");
-        for (let b = 0; b < products.length; b++) {
-            if (products[b].getAttributeNode("excluded_from_colorFilter") == null && products[b].getAttributeNode("excluded_from_Search") == null) {
-                if (filters[i].name == "price") {
-                    if (parseFloat(products[b].getElementsByClassName("product-data-container")[0].getElementsByClassName("product-productprice")[0].innerHTML.replace("CHF", "").replace(".-", "")) <= filters[i].value) {
-                        products[b].style.display = "block";
-                        if (products[b].getAttributeNode("excluded_from_priceFilter") != null && products[b].getAttributeNode("excluded_from_priceFilter") != false) {
-                            products[b].removeAttributeNode(products[b].getAttributeNode("excluded_from_priceFilter"));
-                        }
-                    }
-                    else {
-                        products[b].style.display = "none";
-                        excludedFromPriceFilter = document.createAttribute("excluded_from_priceFilter");
-                        products[b].setAttributeNode(excludedFromPriceFilter);
-                    }
-                }
+    pricefilter = document.getElementById("price-filter-slider");
+    products = document.getElementsByClassName("product-container");
+    for (let b = 0; b < products.length; b++) {
+        if (products[b].getAttribute("excluded_from_colorFilter") == null && products[b].getAttribute("excluded_from_Search") == null) {
+            if (parseFloat(products[b].getAttribute("productprice")) <= pricefilter.value) {
+                products[b].style.display = "block";
+                products[b].removeAttribute("excluded_from_priceFilter");
             }
             else {
                 products[b].style.display = "none";
+                products[b].setAttribute("excluded_from_priceFilter", "true");
             }
         }
     }
 }
-function filterAvailable() {
-    filters = document.getElementsByClassName("filter-option");
-    for (let i = 0; i < filters.length; i++) {
-        products = document.getElementsByClassName("product-container");
-        for (let b = 0; b < products.length; b++) {
-            if (products[b].getAttributeNode("excluded_from_colorFilter") == null && products[b].getAttributeNode("excluded_from_Search") == null) {
-                if (filters[i].name == "available") {
-                    if (parseFloat(products[b].getElementsByClassName("product-data-container")[0].getElementsByClassName("product-productprice")[0].innerHTML.replace("CHF", "").replace(".-", "")) <= filters[i].value) {
-                        products[b].style.display = "block";
-                        if (products[b].getAttributeNode("excluded_from_priceFilter") != null && products[b].getAttributeNode("excluded_from_priceFilter") != false) {
-                            products[b].removeAttributeNode(products[b].getAttributeNode("excluded_from_priceFilter"));
-                        }
-                    }
-                    else {
-                        products[b].style.display = "none";
-                        excludedFromPriceFilter = document.createAttribute("excluded_from_priceFilter");
-                        products[b].setAttributeNode(excludedFromPriceFilter);
-                    }
-                }
-            }
-            else {
-                products[b].style.display = "none";
-            }
+function colorarrcontains(arr, colortag) {
+    for(i = 0; i < arr.length; i++){
+        if(arr[i].color_tag == colortag.toLowerCase()){
+            return true;
         }
     }
+    return false;
 }
-function getHashCodeOfColorTag(colorTag) {
-    found = false;
-    foundedval = undefined;
-    colorsWithCodes.forEach(color => {
-        if (color.color_tag == colorTag) {
-            found = true;
-            foundedval = color.colorcode;
-        }
-    })
-    if (found) {
-        return foundedval;
-    }
-    else {
-        return false;
-    }
-}
-const rgb2hex = (rgb) => `#${rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/).slice(1).map(n => parseInt(n, 10).toString(16).padStart(2, '0')).join('')}`
-

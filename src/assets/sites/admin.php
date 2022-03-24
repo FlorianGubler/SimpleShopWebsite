@@ -236,10 +236,13 @@ include '../../navbar.php';
                                             ?>
                                             <div class="order-list-product">
                                                 <span><?php echo $texte->productname ?>: <?php echo "#" . $orderproduct["PK_product"] . " - " . $orderproduct["productname"] ?></span>
-                                                <span><?php echo $texte->productcolor ?>: <?php echo $orderproduct["color_tag"] ?></span>
+                                                <span><?php echo $texte->productcolor ?>: <?php echo strtoupper($orderproduct["color_tag"]) ?></span>
                                                 <span><?php echo $texte->amount ?>: <?php echo $orderproduct["amount"] ?></span>
                                             </div>
                                             <?php
+                                        }
+                                        if(count($order["products"]) == 0){
+                                            echo $texte->nothingfound;
                                         }
                                         ?>
                                     </div>
