@@ -67,7 +67,7 @@ $maxminPrice = $conn->getMaxMinPrice();
                     <?php
                     } else {
                     ?>
-                        <div class="product-addtocart-container" style="width: 50px;">
+                        <div class="product-addtocart-container" style="width: fit-content;">
                             <p style="color: red; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-break: anywhere;"><?php echo $texte->soldout ?></p>
                         </div>
                     <?php

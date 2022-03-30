@@ -71,12 +71,12 @@
 }
 .product-addtocart-container{
     position: absolute;
-    top: 25px;
-    right: 0;
+    top: 15px;
+    right: 10px;
     width: 30px;
-    padding: 5px;
-    background-color: white;
+    background-color: rgb(250, 250, 250);
     z-index: 4;
+    padding: 7px;
 }
 .cart-color-btn{
     cursor: pointer;
