@@ -69,5 +69,8 @@
   "cartempty": "Cart is empty",
   "changedlang": "Succesfully changed Language",
   "contactformuploaded": "Succesfully uploaded contact form",
-  "adduser": "Add User"
+  "adduser": "Add User",
+  "paymentsuccess": "Payment succesfull",
+  "paymentprocesing": "Payment is processing",
+  "paymentfailed": "Payment failed"
 }

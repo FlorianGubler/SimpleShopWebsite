@@ -52,7 +52,6 @@ include '../../navbar.php';
                                 <div class="spinner hidden" id="spinner"></div>
                                 <span id="button-text"><?php echo $texte->send ?></span>
                             </button>
-                            <div id="payment-message" class="hidden"></div>
                         </div>
                     </div>
                 </form>

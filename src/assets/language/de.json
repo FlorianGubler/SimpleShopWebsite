@@ -69,5 +69,8 @@
   "cartempty": "Warenkorb ist leer",
   "changedlang": "Sprache erfolgreich geändert",
   "contactformuploaded": "Ihre Anfrage wurde erfolgreich gesendet",
-  "adduser": "Benutzer hinzufügen"
+  "adduser": "Benutzer hinzufügen",
+  "paymentsuccess": "Bezahlung erfolgreich",
+  "paymentprocesing": "Bezahlung im Gange",
+  "paymentfailed": "Bezahlung fehlgeschlagen"
 }

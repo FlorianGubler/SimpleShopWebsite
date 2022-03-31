@@ -1,5 +1,7 @@
 // This is your test publishable API key.
-const stripe = Stripe("pk_test_51KjIjDIOaiHqEU1iAD5rQzSNyTPF7g49A8QHOJf4TvAUNF2usyn7XRGhABrCWeqhcqyZ6iSYd23ZxtCfB9iU2KLz00eY4MPGqF");
+const stripe = Stripe("pk_live_51KjPsIHFwRqfOP6WFzuToAZlbjp7LsM865wQ56eCMiUGbUnxIjo5ZJEVB1Q8X0Mrpx2SKrEvPVjfMfpDgsFMesa200iS3hxRIE", {
+    locale: LANG
+});
 
 // The items the customer wants to buy
 const items = [{ id: "xl-tshirt" }];
@@ -15,7 +17,7 @@ document
 
 // Fetches a payment intent and captures the client secret
 async function initialize() {
-    const { clientSecret } = await fetch(rootpath + "assets/dbquerys/create.php", {
+    const { clientSecret } = await fetch(rootpath + "/assets/dbquerys/createcheckout.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ items }),
@@ -30,26 +32,27 @@ async function initialize() {
 async function handleSubmit(e) {
     e.preventDefault();
     setLoading(true);
-    for(var pair of new FormData(document.querySelector("#payment-form"))) {
-        console.log(pair[0] + ', ' + pair[1]);
-    }
+
+    let orderid = await fetch(rootpath + "/actionmgr.php", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: "action=createorder&fullname=" + document.getElementById("fname").value + "&email=" + document.getElementById("email").value + "&address=" + document.getElementById("adr").value + "&city=" + document.getElementById("city").value + "&state=" + document.getElementById("state").value + "&postcode=" + document.getElementById("zip").value,
+    }).then(response => response.text());
+
     const { error } = await stripe.confirmPayment({
         elements,
         confirmParams: {
             // Make sure to change this to your payment completion page
-            return_url: "http://localhost:4242/public/checkout.html",
+            return_url: rootpath + "/assets/sites/checkout.php?orderid=" + orderid,
         },
     });
 
-    // This point will only be reached if there is an immediate error when
-    // confirming the payment. Otherwise, your customer will be redirected to
-    // your `return_url`. For some payment methods like iDEAL, your customer will
-    // be redirected to an intermediate site first to authorize the payment, then
-    // redirected to the `return_url`.
     if (error.type === "card_error" || error.type === "validation_error") {
-        showMessage(error.message);
+        showMessage("error", error.message);
     } else {
-        showMessage("An unexpected error occured.");
+        showMessage("error", TEXTE.error);
     }
 
     setLoading(false);
@@ -69,32 +72,19 @@ async function checkStatus() {
 
     switch (paymentIntent.status) {
         case "succeeded":
-            showMessage("Payment succeeded!");
+            showMessage("success", TEXTE.paymentsuccess);
+            updateOrder(new URLSearchParams(window.location.search).get("orderid"), "paid");
             break;
         case "processing":
-            showMessage("Your payment is processing.");
+            showMessage("info", TEXTE.paymentprocessing);
             break;
         case "requires_payment_method":
-            showMessage("Your payment was not successful, please try again.");
+            showMessage("error", TEXTE.paymentfailed);
             break;
         default:
-            showMessage("Something went wrong.");
+            showMessage("error", TEXTE.error);
             break;
     }
-}
-
-// ------- UI helpers -------
-
-function showMessage(messageText) {
-    const messageContainer = document.querySelector("#payment-message");
-
-    messageContainer.classList.remove("hidden");
-    messageContainer.textContent = messageText;
-
-    setTimeout(function () {
-        messageContainer.classList.add("hidden");
-        messageText.textContent = "";
-    }, 4000);
 }
 
 // Show a spinner on payment submission
@@ -109,4 +99,18 @@ function setLoading(isLoading) {
         document.querySelector("#spinner").classList.add("hidden");
         document.querySelector("#button-text").classList.remove("hidden");
     }
+}
+
+function updateOrder(orderid, newstatus){
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            reloadCart();
+        } else if(this.readyState == 4){
+            showMessage("error", TEXTE.error);
+        }
+    };
+    xhttp.open("POST", rootpath + "/actionmgr.php", true);
+    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhttp.send("action=updateorderstatus&orderid=" + orderid + "&newstatus=" + newstatus);
 }

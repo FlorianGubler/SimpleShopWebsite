@@ -226,6 +226,12 @@ class DBquery
         }
 
         $_SESSION["cart"] = [];
+        return $orderid;
+    }
+
+    function ChangeOrderStatus($orderID, $newstatus){
+        $sql = "UPDATE orders SET status = '$newstatus' WHERE PK_order = $orderID";
+        return $this->dbconn->query($sql);
     }
 
     function GetProductsFromOrder($pkOrder){

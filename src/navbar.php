@@ -8,6 +8,7 @@ if (isset($_POST['getjsonofproduct'])) {
 <script>
     const rootpath = "<?php echo $rootpath; ?>";
     const TEXTE = JSON.parse('<?php echo json_encode($texte) ?>');
+    const LANG = '<?php echo $_SESSION["lang"]; ?>';
 </script>
 
 <div class="expand-navbar">

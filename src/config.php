@@ -1,8 +1,6 @@
 <?php
-$rootpath = "https://shop/";
+$rootpath = "https://shop";
 $pathname = $_SERVER["DOCUMENT_ROOT"] . "/";
-
-$shippingprice = 5;
 
 $hostname = "shop";
 $username = "root";
@@ -44,7 +42,7 @@ if(!isset($_SESSION["lang"])){
     $_SESSION["lang"] = "en";
 }
 
+$shippingprice = json_decode(file_get_contents($pathname .  "assets/config/config.json"))->shippingprice;
+
 //Include Language File
 $texte = json_decode(file_get_contents($pathname .  "assets/language/" . $_SESSION["lang"] . ".json"));
-
-//TODO: Payment
