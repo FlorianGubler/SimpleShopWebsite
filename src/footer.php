@@ -22,7 +22,7 @@
     <div class="footer-extra-container">
         <ul style="display:flex; flex-direction: row; align-items: center; justify-content: flex-end;">
             <?php
-                $alllanguages = array_diff(scandir($_SERVER['DOCUMENT_ROOT'] . $pathname . "assets/language/"), array('.', '..'));
+                $alllanguages = array_diff(scandir($pathname . "assets/language/"), array('.', '..'));
                 foreach ($alllanguages as $file) {
                     $iscurrent = "";
                     $lang = pathinfo($file, PATHINFO_FILENAME);
