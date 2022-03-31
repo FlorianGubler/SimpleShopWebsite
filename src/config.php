@@ -1,5 +1,6 @@
 <?php
 $rootpath = "http://shop";
+$pathname = "/";
 
 $hostname = "shop";
 $username = "root";
@@ -42,6 +43,6 @@ if(!isset($_SESSION["lang"])){
 }
 
 //Include Language File
-$texte = json_decode(file_get_contents($_SERVER["DOCUMENT_ROOT"] . "/assets/language/" . $_SESSION["lang"] . ".json"));
+$texte = json_decode(file_get_contents($_SERVER["DOCUMENT_ROOT"] . $pathname .  "assets/language/" . $_SESSION["lang"] . ".json"));
 
 //TODO: Payment
