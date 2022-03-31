@@ -1,8 +1,10 @@
 <?php
-$rootpath = "http://shop";
-$pathname = $_SERVER["DOCUMENT_ROOT"] . "/";
+$rootpath = "https://localhost/m133_shop/src/";
+$pathname = $_SERVER["DOCUMENT_ROOT"] . "/m133_shop/src/";
 
-$hostname = "shop";
+$shippingprice = 5;
+
+$hostname = "localhost";
 $username = "root";
 $password = "";
 $database = "shopdb";

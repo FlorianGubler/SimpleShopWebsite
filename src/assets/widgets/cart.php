@@ -1,7 +1,6 @@
 <?php
 require_once "../../config.php";
 $endprice = 0;
-$shippingprice = 5;
 ?>
 <ul class="cart-container-list">
     <?php

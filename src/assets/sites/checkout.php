@@ -1,9 +1,5 @@
 <?php
     include "../../config.php";
-    if(isset($_POST["checkout"])){
-        $conn->CreateOrder($_POST["fullname"], $_POST["email"], $_POST["address"], $_POST["city"], $_POST["state"], $_POST["postcode"], $_SESSION["cart"]);
-        //Add Payment
-    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,6 +9,8 @@
     include '../../header.php'
     ?>
     <link rel="stylesheet" href="<?php echo $rootpath ?>/assets/css/style_cart.css">
+    <link rel="stylesheet" href="<?php echo $rootpath ?>/assets/css/stripe.css">
+    <script src="https://js.stripe.com/v3/"></script>
     <title><?php echo $texte->titel ?> - <?php echo $texte->checkout ?></title>
 </head>
 
@@ -24,7 +22,7 @@ include '../../navbar.php';
     <div class="row">
         <div class="col-75">
             <div class="container">
-                <form method="POST">
+                <form method="POST" id="payment-form">
                     <div class="row">
                         <div class="col-50">
                             <h3><?php echo $texte->address ?></h3>
@@ -47,36 +45,16 @@ include '../../navbar.php';
                                     <input type="text" id="zip" name="postcode" placeholder="1234" required>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="col-50">
-                            <h3>Payment</h3>
-                            <label for="fname"><?php echo $texte->acceptedcards ?></label>
-                            <div class="icon-container">
-                                <i class="fa-brands fa-cc-visa" style="color:navy;"></i>
-                                <i class="fa-brands fa-cc-amex" style="color:blue;"></i>
-                                <i class="fa-brands fa-cc-mastercard" style="color:red;"></i>
-                                <i class="fa-brands fa-cc-discover" style="color:orange;"></i>
+                            <div id="payment-element">
+                                <!--Stripe.js injects the Payment Element-->
                             </div>
-                            <label for="cname"><?php echo $texte->nameoncard ?></label>
-                            <input type="text" id="cname" name="cardname" placeholder="<?php echo $texte->nameoncard ?>">
-                            <label for="ccnum"><?php echo $texte->cardnumber ?></label>
-                            <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444">
-                            <label for="expmonth"><?php echo $texte->expirationmonth ?></label>
-                            <input type="text" id="expmonth" name="expmonth" placeholder="<?php echo $texte->expirationmonth ?>">
-                            <div class="row">
-                                <div class="col-50">
-                                    <label for="expyear"><?php echo $texte->expirationyear ?></label>
-                                    <input type="text" id="expyear" name="<?php echo $texte->expirationyear ?>" placeholder="2018">
-                                </div>
-                                <div class="col-50">
-                                    <label for="cvv">CVV</label>
-                                    <input type="text" id="cvv" name="CVV" placeholder="352">
-                                </div>
-                            </div>
+                            <button id="submit">
+                                <div class="spinner hidden" id="spinner"></div>
+                                <span id="button-text"><?php echo $texte->send ?></span>
+                            </button>
+                            <div id="payment-message" class="hidden"></div>
                         </div>
                     </div>
-                    <button type="submit" name="checkout" class="btn"><?php echo $texte->send ?></button>
                 </form>
             </div>
         </div>
@@ -90,6 +68,7 @@ include '../../navbar.php';
         </div>
     </div>
 </div>
+<script src="<?php echo $rootpath ?>/assets/js/checkout.js"></script>
 <?php
 include '../../footer.php';
 ?>
