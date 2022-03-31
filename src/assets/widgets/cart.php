@@ -23,7 +23,7 @@ $shippingprice = 5;
                             </button>
                             <div class="cart-data-img-container">
                                 <div class="cart-product-img-container">
-                                    <img src="http://shop/assets/img/product_images/<?php echo $cartproduct['picture']; ?>">
+                                    <img class="product-image-img" src="data:image/jpeg;base64,<?php echo base64_encode($cartproduct['picture']) ?>"/>
                                 </div>
                                 <div class="cart-product-data-container">
                                     <p><?php echo $cartproduct['productname']; ?></p>

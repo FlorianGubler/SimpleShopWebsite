@@ -65,5 +65,7 @@
   "addedtocart": "Added to Cart",
   "removedfromcart": "Removed From Cart",
   "available": "Available",
-  "cartempty": "Cart is empty"
+  "cartempty": "Cart is empty",
+  "changedlang": "Succesfully changed Language",
+  "contactformuploaded": "Succesfully uploaded contact form"
 }

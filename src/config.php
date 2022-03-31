@@ -13,7 +13,7 @@ if ($mysqli_conn->connect_errno) {
     exit();
 }
 
-require_once("assets/config/dquerys.class.php");
+require_once("assets/dbquerys/dquerys.class.php");
 
 $conn = new DBquery($mysqli_conn);
 

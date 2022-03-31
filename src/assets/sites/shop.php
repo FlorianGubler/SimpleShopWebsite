@@ -73,7 +73,7 @@ $maxminPrice = $conn->getMaxMinPrice();
                     <?php
                     }
                     foreach ($product["pictures"] as $product_picture) {
-                        echo "<img class='product-image-img' src='$rootpath/assets/img/product_images/" . $product_picture . "'>";
+                        echo '<img class="product-image-img" src="data:image/jpeg;base64,'.base64_encode($product_picture).'"/>';
                     }
                     echo "<div class='product-images-slider-container'>";
                     for ($i = 1; $i <= count($product["pictures"]); $i++) {

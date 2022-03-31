@@ -21,7 +21,7 @@ if(isset($_POST["addcolor"])){
 if(isset($_POST["deleteproduct"])){
     if($_SESSION["admin"]){
         $conn->Admin_DeleteProduct($_POST["productid"]);
-        //header("Location: " . $_SERVER["PHP_SELF"]);
+        header("Location: " . $_SERVER["PHP_SELF"]);
     }
 }
 

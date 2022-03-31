@@ -72,5 +72,13 @@ if (isset($_POST['getjsonofproduct'])) {
 </div>
 <div id="messages-container"></div>
 <noscript>You need to have JavaScript enabled to run this site</noscript>
+<script>
+    <?php
+        if(isset($_SESSION["showmessage"])){
+            echo "showMessage('" . $_SESSION["showmessage"]["type"] . "', '" . $_SESSION["showmessage"]["text"] . "');";
+            unset($_SESSION["showmessage"]);
+        }
+    ?>
+</script>
 <script src="<?php echo $rootpath; ?>/assets/js/expandmenu.js"></script>
 <script src="<?php echo $rootpath; ?>/assets/js/cart_mgr.js"></script>

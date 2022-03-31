@@ -56,14 +56,14 @@
             if($contact_upload_failed){
                 ?>
                     <div class="contact-upload-failed">
-                        <p><i class="fas fa-times"></i> Something went wrong, please try again</p>
+                        <p><i class="fas fa-times"></i><?php echo $texte->error ?></p>
                     </div>
                 <?php
             }
             else if(!$contact_upload_failed && $contact_uploaded){
                 ?>
                     <div class="contact-upload-success">
-                        <p><i class="fas fa-check"></i> Request succesfully uploaded</p>
+                        <p><i class="fas fa-check"></i><?php echo $texte->contactformuploaded ?></p>
                     </div>
                 <?php
             }

@@ -65,5 +65,7 @@
   "addedtocart": "Erfolgreich zum Warenkorb hinzugefügt",
   "removedfromcart": "Erfolgreich aus Warenkorb entfernt",
   "available": "Verfügbar",
-  "cartempty": "Warenkorb ist leer"
+  "cartempty": "Warenkorb ist leer",
+  "changedlang": "Sprache erfolgreich geändert",
+  "contactformuploaded": "Ihre Anfrage wurde erfolgreich gesendet"
 }

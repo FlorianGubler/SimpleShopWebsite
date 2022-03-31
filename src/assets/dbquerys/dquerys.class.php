@@ -47,11 +47,7 @@ class DBquery
         $sql = "SELECT * FROM product_images WHERE FK_product=$PK_product";
         $qry = $this->dbconn->query($sql);
         while ($result = $qry->fetch_assoc()) {
-            if (!file_exists($result['pictureurl'])) {
-                array_push($pictures, $result['pictureurl']);
-            } else {
-                array_push($pictures, "default_product.jpg");
-            }
+            array_push($pictures, $result['picture']);
         }
         if (count($pictures) == 0) {
             array_push($pictures, "default_product.jpg");
@@ -78,7 +74,7 @@ class DBquery
         $products = array();
         $newestproducts = array();
 
-        $sql = "SELECT * FROM products ORDER BY upload_date DESC";
+        $sql = "SELECT * FROM products ORDER BY upload_date DESC LIMIT $product_count";
         $qry = $this->dbconn->query($sql);
 
         while ($result = $qry->fetch_assoc()) {
@@ -86,14 +82,7 @@ class DBquery
             $result["colors"] = $this->getColorsOfProduct($result['PK_product']);
             array_push($products, $result);
         }
-        if (count($products) >= $product_count) {
-            for ($i = 0; $i < $product_count; $i++) {
-                array_push($newestproducts, $products[$i]);
-            }
-            return $newestproducts;
-        } else {
-            return $products;
-        }
+        return $products;
     }
 
     function getAllActiveColors()
@@ -169,43 +158,30 @@ class DBquery
     }
 
     function Admin_AddProduct($productname, $productprice, $productcolors, $productpictures){
-        $error = true;
         $total_count = count($productpictures['name']);
         if($total_count == 0 || count($productcolors) == 0){
             return false;
         }
-        for( $i=0 ; $i < $total_count ; $i++ ) {
-            $tmpFilePath = $productpictures['tmp_name'][$i];
-            if ($tmpFilePath != ""){
-                $newFilePath = $_SERVER["DOCUMENT_ROOT"] . "/assets/img/product_images/" . $productpictures['name'][$i];
-                if(move_uploaded_file($tmpFilePath, $newFilePath)) {
-                    $error = false;
-                } else{
-                    $error = true;
-                }
-            } else{
-                return false;
-            }
-        }
-        if(!$error){
-            $productname = $this->dbconn->real_escape_string($productname);
-            $productprice = $this->dbconn->real_escape_string($productprice);
-            $sql = "INSERT INTO products (productname, price, status) VALUES ('$productname', '$productprice', 'available');";
+        $productname = $this->dbconn->real_escape_string($productname);
+        $productprice = $this->dbconn->real_escape_string($productprice);
+        $sql = "INSERT INTO products (productname, price, status) VALUES ('$productname', '$productprice', 'available');";
 
-            if($this->dbconn->query($sql)){
-                $productid = $this->dbconn->insert_id;
-                foreach ($productcolors as $color){
-                    $sql = "INSERT INTO product_colors (FK_product, FK_color) VALUES ($productid, $color);";
-                    $this->dbconn->query($sql);
-                }
-                foreach ($productpictures["name"] as $picture){
-                    $sql = "INSERT INTO product_images (FK_product, pictureurl) VALUES ($productid, '$picture');";
-                    $this->dbconn->query($sql);
-                }
-                return true;
-            } else{
-                return false;
+        if($this->dbconn->query($sql)){
+            $productid = $this->dbconn->insert_id;
+            foreach ($productcolors as $color){
+                $sql = "INSERT INTO product_colors (FK_product, FK_color) VALUES ($productid, $color);";
+                $this->dbconn->query($sql);
             }
+            foreach ($productpictures["name"] as $key=>$value) {
+                if ($productpictures["error"][$key] <= 0 && !empty($value)) {
+                    $content = addslashes(file_get_contents($productpictures["tmp_name"][$key]));
+                    $sql = "INSERT INTO product_images(FK_product, picture) VALUES($productid, '" . $content ."')";
+                    if(!$this->dbconn->query($sql)) {
+                        return false;
+                    }
+                }
+            }
+            return true;
         } else{
             return false;
         }
@@ -218,9 +194,6 @@ class DBquery
 
     function Admin_DeleteProduct($pkProduct){
         $this->dbconn->query("DELETE FROM product_colors WHERE FK_product = $pkProduct");
-        foreach ($this->getPicturesOfProduct($pkProduct) as $picture){
-            unlink($_SERVER["DOCUMENT_ROOT"] . "/assets/img/product_images/" . $picture);
-        }
         $this->dbconn->query("DELETE FROM product_images WHERE FK_product = $pkProduct;");
         return $this->dbconn->query("DELETE FROM products WHERE PK_product = $pkProduct;");
     }
