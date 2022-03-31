@@ -43,6 +43,11 @@ if(isset($_POST['admin-login'])){
         $failed = true;
     }
 }
+
+if(isset($_POST["add-admin"])){
+    $conn->Admin_AddUser($_POST["username"], $_POST["email"], $_POST["password"]);
+    header("Location: " . $_SERVER["PHP_SELF"]);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -125,6 +130,21 @@ include '../../navbar.php';
                             <input id="inp-pictures" type="file" name="productpictures[]" multiple required accept="image/png, image/gif, image/jpeg">
                         </div>
                         <button type="submit" name="addproduct" class="normal-btn"><?php echo $texte->addproduct ?></button>
+                    </form>
+                    <form action="" method="POST">
+                        <div class="contact-inputs-container">
+                            <label for="inp-username"><?php echo $texte->username ?></label>
+                            <input id="inp-username" type="text" name="username" required>
+                        </div>
+                        <div class="contact-inputs-container">
+                            <label for="inp-username"><?php echo $texte->email ?></label>
+                            <input id="inp-username" type="email" name="email" required>
+                        </div>
+                        <div class="contact-inputs-container">
+                            <label for="inp-username"><?php echo $texte->password ?></label>
+                            <input id="inp-username" type="password" name="password" required>
+                        </div>
+                        <button type="submit" name="add-admin" class="normal-btn"><?php echo $texte->adduser ?></button>
                     </form>
                 </div>
                 <div style="width: 100%">

@@ -146,7 +146,7 @@ class DBquery
         $qry = $this->dbconn->query($sql);
 
         if($qry->num_rows > 0){
-            return true;
+            return $qry->fetch_assoc()["PK_admin"];
         }
         return false;
     }
@@ -256,6 +256,14 @@ class DBquery
 
     function Admin_AddColor($colorTag, $colorCode){
         $sql = "INSERT INTO shop_colors (color_tag, colorcode) VALUES ('$colorTag', '$colorCode');";
+        return $this->dbconn->query($sql);
+    }
+
+    function Admin_AddUser($username, $email, $password){
+        $username = $this->dbconn->real_escape_string($username);
+        $email =  $this->dbconn->real_escape_string($email);
+        $password = hash("sha256", $email . $password);
+        $sql = "INSERT INTO admins (username, email, password) VALUES ('$username', '$email', '$password');";
         return $this->dbconn->query($sql);
     }
 }

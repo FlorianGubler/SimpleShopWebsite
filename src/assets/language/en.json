@@ -14,6 +14,7 @@
   "shippingprice": "Shippingprice",
   "endprice": "Endprice",
   "email": "E-Mail",
+  "username": "Username",
   "password": "Password",
   "loginfailed": "The Login failed",
   "admintools": "AdminTools",
@@ -67,5 +68,6 @@
   "available": "Available",
   "cartempty": "Cart is empty",
   "changedlang": "Succesfully changed Language",
-  "contactformuploaded": "Succesfully uploaded contact form"
+  "contactformuploaded": "Succesfully uploaded contact form",
+  "adduser": "Add User"
 }
