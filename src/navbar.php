@@ -1,5 +1,5 @@
 <?php
-include "config.php";
+require_once "config.php";
 if (isset($_POST['getjsonofproduct'])) {
     echo $conn->getJSONofProduct($_POST['pkproduct']);
     exit;
@@ -33,7 +33,7 @@ if (isset($_POST['getjsonofproduct'])) {
         <img src="<?php echo $rootpath ?>/assets/img/logo.png">
     </div>
     <div id="expand-cart" class="navbar-cart-container">
-        <button onclick="expandcart();"><i class="fas fa-shopping-cart"></i></button>
+        <button onclick="expandcart(<?php echo $carteditable  ? 'true' : 'false'; ?>);"><i class="fas fa-shopping-cart"></i></button>
     </div>
 </div>
 <div id="navbar" class="navbar-container">

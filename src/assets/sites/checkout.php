@@ -1,5 +1,9 @@
 <?php
     include "../../config.php";
+    if(count($_SESSION["cart"]) == 0){
+        header("Location: " . $rootpath . "/index.php");
+    }
+    $carteditable = false;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -62,7 +66,7 @@ include '../../navbar.php';
             </div>
             <script>
                 addCartShow("checkout-cart-container");
-                reloadCart();
+                reloadCart(false);
             </script>
         </div>
     </div>

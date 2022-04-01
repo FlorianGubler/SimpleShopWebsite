@@ -10,7 +10,7 @@ if(isset($_POST["action"]) || isset($_GET["action"])){
         case "changelanguage": changeLanguage(strtolower($method["newlang"])); break;
         case "adminchangeproductstatus": echo $conn->Admin_ChangeProductStatus($method["productid"], $method["newstatus"]); break;
         case "adminchangeorderstatus": echo $conn->Admin_ChangeOrderStatus($method["orderid"], $method["newstatus"]); break;
-        case "createorder": echo $conn->CreateOrder($method["fullname"], $method["email"], $method["address"], $method["city"], $method["state"], $method["postcode"]); break;
+        case "createorder": echo $conn->CreateOrder($method["fullname"], $method["email"], $method["address"], $method["city"], $method["state"], $method["postcode"], $method["paymentid"]); break;
         case "updateorderstatus": echo $conn->ChangeOrderStatus($method["orderid"], $method["newstatus"]);
         default: throw new Exception("Unknown Action");
     }

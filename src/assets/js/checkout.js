@@ -3,10 +3,8 @@ const stripe = Stripe("pk_live_51KjPsIHFwRqfOP6WFzuToAZlbjp7LsM865wQ56eCMiUGbUnx
     locale: LANG
 });
 
-// The items the customer wants to buy
-const items = [{ id: "xl-tshirt" }];
-
 let elements;
+let paymentID;
 
 initialize();
 checkStatus();
@@ -17,13 +15,14 @@ document
 
 // Fetches a payment intent and captures the client secret
 async function initialize() {
-    const { clientSecret } = await fetch(rootpath + "/assets/dbquerys/createcheckout.php", {
+    const paymentIntent = await fetch(rootpath + "/assets/dbquerys/createcheckout.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ items }),
+        body: JSON.stringify({}),
     }).then((r) => r.json());
 
-    elements = stripe.elements({ clientSecret });
+    paymentID = paymentIntent.id;
+    elements = stripe.elements({clientSecret: paymentIntent.client_secret});
 
     const paymentElement = elements.create("payment");
     paymentElement.mount("#payment-element");
@@ -38,7 +37,7 @@ async function handleSubmit(e) {
         headers: {
             "Content-Type": "application/x-www-form-urlencoded"
         },
-        body: "action=createorder&fullname=" + document.getElementById("fname").value + "&email=" + document.getElementById("email").value + "&address=" + document.getElementById("adr").value + "&city=" + document.getElementById("city").value + "&state=" + document.getElementById("state").value + "&postcode=" + document.getElementById("zip").value,
+        body: "action=createorder&fullname=" + document.getElementById("fname").value + "&email=" + document.getElementById("email").value + "&address=" + document.getElementById("adr").value + "&city=" + document.getElementById("city").value + "&state=" + document.getElementById("state").value + "&postcode=" + document.getElementById("zip").value + "&paymentid=" + paymentID,
     }).then(response => response.text());
 
     const { error } = await stripe.confirmPayment({
@@ -55,6 +54,7 @@ async function handleSubmit(e) {
         showMessage("error", TEXTE.error);
     }
 
+    reloadCart();
     setLoading(false);
 }
 

@@ -42,6 +42,10 @@ if(!isset($_SESSION["lang"])){
     $_SESSION["lang"] = "en";
 }
 
+if(!isset($carteditable)){
+    $carteditable = true;
+}
+
 $shippingprice = json_decode(file_get_contents($pathname .  "assets/config/config.json"))->shippingprice;
 
 //Include Language File

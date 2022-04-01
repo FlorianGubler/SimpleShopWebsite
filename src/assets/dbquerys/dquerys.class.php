@@ -205,7 +205,7 @@ class DBquery
         return $enum;
     }
 
-    function CreateOrder($fullname, $email, $address, $city, $state, $postcode){
+    function CreateOrder($fullname, $email, $address, $city, $state, $postcode, $paymentID){
         $fullname = $this->dbconn->real_escape_string($fullname);
         $email = $this->dbconn->real_escape_string($email);
         $address = $this->dbconn->real_escape_string($address);
@@ -216,7 +216,7 @@ class DBquery
         $this->dbconn->query($sql);
         $userdataid = $this->dbconn->insert_id;
 
-        $sql = "INSERT INTO orders (FK_userdata) VALUES ($userdataid);";
+        $sql = "INSERT INTO orders (FK_userdata, paymentID) VALUES ($userdataid, '$paymentID');";
         $this->dbconn->query($sql);
         $orderid = $this->dbconn->insert_id;
 
@@ -224,7 +224,6 @@ class DBquery
             $sql = "INSERT INTO order_products (FK_product, FK_order, FK_color, amount) VALUES (" . $cartobj[0] . ", $orderid, " . $cartobj[2] . ", " . $cartobj[1] . ");";
             $this->dbconn->query($sql);
         }
-
         $_SESSION["cart"] = [];
         return $orderid;
     }

@@ -1,5 +1,5 @@
-function expandcart() {
-    reloadCart();
+function expandcart(editable) {
+    reloadCart(editable);
     document.getElementById("cart-container").style.display = "block";
 }
 function closecart() {
@@ -9,7 +9,7 @@ const secondarycartshower = [];
 function addCartShow(el){
     secondarycartshower.push(el);
 }
-function reloadCart() {
+function reloadCart(editable = true) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -24,7 +24,7 @@ function reloadCart() {
             }
         }
     };
-    xhttp.open("GET", rootpath + "/assets/widgets/cart.php", true);
+    xhttp.open("GET", rootpath + "/assets/widgets/cart.php?editable=" + editable, true);
     xhttp.send();
 }
 
