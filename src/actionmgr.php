@@ -16,7 +16,7 @@ if(isset($_POST["action"]) || isset($_GET["action"])){
         default: throw new Exception("Unknown Action");
     }
     if(isset($method["redirect"])){
-        header("Location: " . $rootpath . $method["redirect"]);
+        header("Location: " . $method["redirect"]);
     }
 } else {
     throw new Exception("Action not given");

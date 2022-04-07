@@ -29,7 +29,7 @@
                     if(strtolower($lang) == $_SESSION["lang"]){
                         $iscurrent = "text-decoration: underline;";
                     }
-                    echo "<li style='list-style: none; margin: 5px;' class='footer-ul-item'><a style='text-decoration: none; $iscurrent' href='$rootpath/actionmgr.php?action=changelanguage&redirect=" . $_SERVER["PHP_SELF"] . "&newlang=$lang'>" . strtoupper($lang) . "</a></li>";
+                    echo "<li style='list-style: none; margin: 5px;' class='footer-ul-item'><a style='text-decoration: none; $iscurrent' href='$rootpath/actionmgr.php?action=changelanguage&redirect=" . urlencode($_SERVER["PHP_SELF"]) . "&newlang=$lang'>" . strtoupper($lang) . "</a></li>";
                 }
             ?>
         </ul>
