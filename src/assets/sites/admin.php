@@ -137,17 +137,17 @@ include '../../navbar.php';
                             <input id="inp-username" type="text" name="username" required>
                         </div>
                         <div class="contact-inputs-container">
-                            <label for="inp-username"><?php echo $texte->email ?></label>
-                            <input id="inp-username" type="email" name="email" required>
+                            <label for="inp-email"><?php echo $texte->email ?></label>
+                            <input id="inp-email" type="email" name="email" required>
                         </div>
                         <div class="contact-inputs-container">
-                            <label for="inp-username"><?php echo $texte->password ?></label>
-                            <input id="inp-username" type="password" name="password" required>
+                            <label for="inp-password"><?php echo $texte->password ?></label>
+                            <input id="inp-password" autocomplete="new-password" type="password" name="password" required>
                         </div>
                         <button type="submit" name="add-admin" class="normal-btn"><?php echo $texte->adduser ?></button>
                     </form>
                 </div>
-                <div style="width: 100%">
+                <div style="width: 100%" class="table-overflow">
                     <span class="title"><?php echo $texte->products ?></span>
                     <table>
                         <tr>
@@ -191,7 +191,7 @@ include '../../navbar.php';
                 </div>
             </div>
             <div class="contact-table">
-                <div class="table-container">
+                <div class="table-container table-overflow">
                     <span class="title"><?php echo $texte->contactrequests ?></span>
                     <table>
                         <tr>
@@ -214,7 +214,7 @@ include '../../navbar.php';
                         ?>
                     </table>
                 </div>
-                <div class="table-container">
+                <div class="table-container table-overflow">
                     <span class="title"><?php echo $texte->orders ?></span>
                     <table class="table-small">
                         <tr>

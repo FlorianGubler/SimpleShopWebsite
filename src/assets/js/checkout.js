@@ -7,7 +7,6 @@ let orderid;
 let elements;
 let paymentID;
 
-initialize();
 checkStatus();
 
 document
@@ -69,6 +68,7 @@ async function checkStatus() {
     );
 
     if (!clientSecret) {
+        initialize();
         return;
     }
 
@@ -79,6 +79,7 @@ async function checkStatus() {
             showMessage("success", TEXTE.paymentsuccess);
             updateOrder(new URLSearchParams(window.location.search).get("orderid"), "paid");
             clearCart();
+            location.href = rootpath + "?showmsg=paymentsuccess";
             break;
         case "processing":
             showMessage("info", TEXTE.paymentprocessing);

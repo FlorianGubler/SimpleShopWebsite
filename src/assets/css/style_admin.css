@@ -63,3 +63,7 @@
 .colorcodecontainer{
     padding: 5px;
 }
+.table-overflow{
+    max-height: 600px;
+    overflow-y: auto;
+}

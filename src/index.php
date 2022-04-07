@@ -75,6 +75,13 @@ $newestproducts = $conn->getNewestProducts(3);
     </div>
     <script src="assets/js/slider.js"></script>
     <?php
+        if(isset($_GET["showmsg"])){
+            switch ($_GET["showmsg"]){
+                case "paymentsuccess": echo "<script>showMessage('success', TEXTE.paymentsuccess)</script>";
+            }
+        }
+    ?>
+    <?php
     include 'footer.php';
     ?>
 </body>
