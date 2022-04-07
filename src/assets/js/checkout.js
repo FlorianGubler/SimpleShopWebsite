@@ -3,6 +3,7 @@ const stripe = Stripe("pk_live_51KjPsIHFwRqfOP6WFzuToAZlbjp7LsM865wQ56eCMiUGbUnx
     locale: LANG
 });
 
+let orderid;
 let elements;
 let paymentID;
 
@@ -32,13 +33,16 @@ async function handleSubmit(e) {
     e.preventDefault();
     setLoading(true);
 
-    let orderid = await fetch(rootpath + "/actionmgr.php", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/x-www-form-urlencoded"
-        },
-        body: "action=createorder&fullname=" + document.getElementById("fname").value + "&email=" + document.getElementById("email").value + "&address=" + document.getElementById("adr").value + "&city=" + document.getElementById("city").value + "&state=" + document.getElementById("state").value + "&postcode=" + document.getElementById("zip").value + "&paymentid=" + paymentID,
-    }).then(response => response.text());
+    if(orderid == undefined){
+        orderid = await fetch(rootpath + "/actionmgr.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: "action=createorder&fullname=" + document.getElementById("fname").value + "&email=" + document.getElementById("email").value + "&address=" + document.getElementById("adr").value + "&city=" + document.getElementById("city").value + "&state=" + document.getElementById("state").value + "&postcode=" + document.getElementById("zip").value + "&paymentid=" + paymentID,
+        }).then(response => response.text());
+    }
+
 
     const { error } = await stripe.confirmPayment({
         elements,
@@ -74,6 +78,7 @@ async function checkStatus() {
         case "succeeded":
             showMessage("success", TEXTE.paymentsuccess);
             updateOrder(new URLSearchParams(window.location.search).get("orderid"), "paid");
+            clearCart();
             break;
         case "processing":
             showMessage("info", TEXTE.paymentprocessing);
@@ -113,4 +118,18 @@ function updateOrder(orderid, newstatus){
     xhttp.open("POST", rootpath + "/actionmgr.php", true);
     xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xhttp.send("action=updateorderstatus&orderid=" + orderid + "&newstatus=" + newstatus);
+}
+
+function clearCart(){
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            reloadCart();
+        } else if(this.readyState == 4){
+            showMessage("error", TEXTE.error);
+        }
+    };
+    xhttp.open("POST", rootpath + "/actionmgr.php", true);
+    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhttp.send("action=clearcart");
 }

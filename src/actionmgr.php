@@ -12,6 +12,7 @@ if(isset($_POST["action"]) || isset($_GET["action"])){
         case "adminchangeorderstatus": echo $conn->Admin_ChangeOrderStatus($method["orderid"], $method["newstatus"]); break;
         case "createorder": echo $conn->CreateOrder($method["fullname"], $method["email"], $method["address"], $method["city"], $method["state"], $method["postcode"], $method["paymentid"]); break;
         case "updateorderstatus": echo $conn->ChangeOrderStatus($method["orderid"], $method["newstatus"]);
+        case "clearcart": echo $conn->ClearCart();
         default: throw new Exception("Unknown Action");
     }
     if(isset($method["redirect"])){

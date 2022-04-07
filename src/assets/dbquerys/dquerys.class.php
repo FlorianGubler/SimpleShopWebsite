@@ -224,8 +224,11 @@ class DBquery
             $sql = "INSERT INTO order_products (FK_product, FK_order, FK_color, amount) VALUES (" . $cartobj[0] . ", $orderid, " . $cartobj[2] . ", " . $cartobj[1] . ");";
             $this->dbconn->query($sql);
         }
-        $_SESSION["cart"] = [];
         return $orderid;
+    }
+
+    function ClearCart(){
+        $_SESSION["cart"] = [];
     }
 
     function ChangeOrderStatus($orderID, $newstatus){
