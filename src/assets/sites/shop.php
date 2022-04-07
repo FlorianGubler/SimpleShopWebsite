@@ -90,7 +90,7 @@ $maxminPrice = $conn->getMaxMinPrice();
                     <?php
                     foreach ($product["colors"] as $product_color) {
                     ?>
-                        <div class="product-color-coloritem" style="background-color: <?php echo $product_color['colorcode']; ?>;"></div>
+                        <div class="product-color-coloritem" style="background-color: <?php echo $product_color['colorcode']; ?>;" onclick="addtocart(<?php echo $product["PK_product"] ?>, <?php echo $product_color['PK_color'] ?>);"></div>
                     <?php
                     }
                     ?>

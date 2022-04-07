@@ -73,11 +73,11 @@ include '../../navbar.php';
                     <form action="" method="post">
                         <div class="contact-inputs-container">
                             <label for="input-email"><?php echo $texte->email ?></label>
-                            <input id="input-email" type="email" name="email" placeholder="<?php echo $texte->email ?>" required>
+                            <input id="input-email" type="email" autocomplete="username" name="email" placeholder="<?php echo $texte->email ?>" required>
                         </div>
                         <div class="contact-inputs-container">
                             <label for=input-password"><?php echo $texte->password ?></label>
-                            <input id="input-subject" type="password" name="password" placeholder="<?php echo $texte->password ?>" required>
+                            <input id="input-subject" autocomplete="password" type="password" name="password" placeholder="<?php echo $texte->password ?>" required>
                         </div>
 
                         <button type="submit" name="admin-login"><?php echo $texte->login ?></button>
