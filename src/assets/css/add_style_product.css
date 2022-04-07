@@ -69,6 +69,9 @@
     border: 1px solid rgb(192, 192, 192);
     margin: 3px;
 }
+.product-color-coloritem:hover {
+    filter: grayscale(0.3);
+}
 .product-addtocart-container{
     position: absolute;
     top: 15px;
