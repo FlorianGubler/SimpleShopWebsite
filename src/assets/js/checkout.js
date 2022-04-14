@@ -57,7 +57,7 @@ async function handleSubmit(e) {
         showMessage("error", TEXTE.error);
     }
 
-    reloadCart();
+    reloadCart(false);
     setLoading(false);
 }
 
@@ -111,7 +111,7 @@ function updateOrder(orderid, newstatus){
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            reloadCart();
+            reloadCart(false);
         } else if(this.readyState == 4){
             showMessage("error", TEXTE.error);
         }
@@ -125,7 +125,7 @@ function clearCart(){
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            reloadCart();
+            reloadCart(false);
         } else if(this.readyState == 4){
             showMessage("error", TEXTE.error);
         }

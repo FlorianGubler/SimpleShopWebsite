@@ -36,30 +36,33 @@ if (isset($_POST['getjsonofproduct'])) {
         <button onclick="expandcart(<?php echo $carteditable  ? 'true' : 'false'; ?>);"><i class="fas fa-shopping-cart"></i></button>
     </div>
 </div>
-<div id="navbar" class="navbar-container">
-    <ul>
-        <li class="navbar-ul-item">
-            <a href="<?php echo $rootpath ?>/index.php"><?php echo strtoupper($texte->home); ?></a>
-        </li>
-        <li class="navbar-ul-item">
-            <a href="<?php echo $rootpath ?>/assets/sites/shop.php"><?php echo strtoupper($texte->shop); ?></a>
-        </li>
-        <li class="navbar-ul-item">
-            <a href="<?php echo $rootpath ?>/assets/sites/story.php"><?php echo strtoupper($texte->story); ?></a>
-        </li>
-        <li class="navbar-ul-item">
-            <a href="<?php echo $rootpath ?>/assets/sites/contact.php"><?php echo strtoupper($texte->contact); ?></a>
-        </li>
-        <?php
+<div id="navbar">
+    <div class="navbar-container">
+        <ul>
+            <li class="navbar-ul-item">
+                <a href="<?php echo $rootpath ?>/index.php"><?php echo strtoupper($texte->home); ?></a>
+            </li>
+            <li class="navbar-ul-item">
+                <a href="<?php echo $rootpath ?>/assets/sites/shop.php"><?php echo strtoupper($texte->shop); ?></a>
+            </li>
+            <li class="navbar-ul-item">
+                <a href="<?php echo $rootpath ?>/assets/sites/story.php"><?php echo strtoupper($texte->story); ?></a>
+            </li>
+            <li class="navbar-ul-item">
+                <a href="<?php echo $rootpath ?>/assets/sites/contact.php"><?php echo strtoupper($texte->contact); ?></a>
+            </li>
+            <?php
             if($_SESSION["admin"]){
                 ?>
-                    <li class="navbar-ul-item">
-                        <a href="<?php echo $rootpath ?>/assets/sites/admin.php"><?php echo strtoupper($texte->admin); ?></a>
-                    </li>
+                <li class="navbar-ul-item">
+                    <a href="<?php echo $rootpath ?>/assets/sites/admin.php"><?php echo strtoupper($texte->admin); ?></a>
+                </li>
                 <?php
             }
-        ?>
-    </ul>
+            ?>
+        </ul>
+    </div>
+    <div onclick="expandMenuclicked()" class="navbar-onclickout"></div>
 </div>
 <div id="cart-container">
     <div class="cart-content-container">

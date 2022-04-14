@@ -38,12 +38,12 @@ button:focus{
     opacity: 0.95;
     padding: 15px;
 }
-.closeNav{
+.closeNav .navbar-container, .closeNav .navbar-onclickout{
     animation-name: showMenu;
     animation-direction: reverse;
     display: none;
 }
-.openNav{
+.openNav .navbar-container, .openNav .navbar-onclickout{
     animation-name: showMenu;
     animation-duration: 1s;
     display: flex;
@@ -348,4 +348,15 @@ left: 50%;
 }
 .icon-btn:hover{
     opacity: 0.7;
+}
+.navbar-onclickout{
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: calc(80% - 30px);
+    height: 100%;
+    display: none;
+    background-color: rgba(65, 66, 66, 0.21);
+    z-index: 1000;
+    cursor: pointer;
 }

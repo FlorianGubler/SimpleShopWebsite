@@ -9,7 +9,7 @@ const secondarycartshower = [];
 function addCartShow(el){
     secondarycartshower.push(el);
 }
-function reloadCart(editable = true) {
+function reloadCart(editable) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -33,7 +33,7 @@ function addtocart(pkProduct, color) {
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             showMessage("success", TEXTE.addedtocart)
-            reloadCart();
+            reloadCart(true);
         } else if(this.readyState == 4){
             showMessage("error", TEXTE.error)
         }
@@ -47,7 +47,7 @@ function deleteItemFromCart(pkProduct, color) {
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             showMessage("success", TEXTE.removedfromcart)
-            reloadCart();
+            reloadCart(true);
         } else if(this.readyState == 4){
             showMessage("error", TEXTE.error)
         }
@@ -60,7 +60,7 @@ function amountMinusCart(pkProduct, color) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            reloadCart();
+            reloadCart(true);
         } else if(this.readyState == 4){
             showMessage("error", TEXTE.error)
         }
@@ -73,7 +73,7 @@ function amountPlusCart(pkProduct, color) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            reloadCart();
+            reloadCart(true);
         } else if(this.readyState == 4){
             showMessage("error", TEXTE.error)
         }

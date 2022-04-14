@@ -65,7 +65,8 @@ INSERT INTO `contact` (`PK_contact`, `email`, `subject`, `text`) VALUES
 CREATE TABLE `orders` (
                           `PK_order` int(11) NOT NULL,
                           `FK_userdata` int(11) NOT NULL,
-                          `status` enum('ordered','paid','shipped','rejected') NOT NULL
+                          `status` enum('ordered','paid','shipped','rejected') NOT NULL,
+                          `paymentID` varchar(500)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
