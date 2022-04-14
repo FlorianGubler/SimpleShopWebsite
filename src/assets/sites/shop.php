@@ -36,8 +36,12 @@ $maxminPrice = $conn->getMaxMinPrice();
                     <option value="-1"><?php echo $texte->none ?></option>
                     <?php
                     foreach ($allActiveColors as $color) {
+                        $csscolor = "black";
+                        if($color["colorcode"] == "#000000"){
+                            $csscolor = "white";
+                        }
                     ?>
-                        <option><?php echo strtoupper($color["color_tag"]); ?></option>
+                        <option style="background-color: <?php echo $color["colorcode"]; ?>; color: <?php echo $csscolor; ?>"><?php echo strtoupper($color["color_tag"]); ?></option>
                     <?php
                     }
                     ?>
