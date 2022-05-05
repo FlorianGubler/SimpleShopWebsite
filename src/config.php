@@ -1,6 +1,6 @@
 <?php
-$rootpath = "https://localhost/m133_shop/src";
-$pathname = $_SERVER["DOCUMENT_ROOT"] . "/m133_shop/src/";
+$rootpath = "https://shop";
+$pathname = $_SERVER["DOCUMENT_ROOT"] . "/";
 
 $hostname = "localhost";
 $username = "root";
