@@ -22,30 +22,30 @@
     <div class="footer-extra-container">
         <ul style="display:flex; flex-direction: row; align-items: center; justify-content: flex-end;">
             <?php
-                $alllanguages = array_diff(scandir($pathname . "assets/language/"), array('.', '..'));
-                foreach ($alllanguages as $file) {
-                    $iscurrent = "";
-                    $lang = pathinfo($file, PATHINFO_FILENAME);
-                    if(strtolower($lang) == $_SESSION["lang"]){
-                        $iscurrent = "text-decoration: underline;";
-                    }
-                    echo "<li style='list-style: none; margin: 5px;' class='footer-ul-item'><a style='text-decoration: none; $iscurrent' href='$rootpath/actionmgr.php?action=changelanguage&redirect=" . urlencode($_SERVER["PHP_SELF"]) . "&newlang=$lang'>" . strtoupper($lang) . "</a></li>";
+            $alllanguages = array_diff(scandir($pathname . "assets/language/"), array('.', '..'));
+            foreach ($alllanguages as $file) {
+                $iscurrent = "";
+                $lang = pathinfo($file, PATHINFO_FILENAME);
+                if (strtolower($lang) == $_SESSION["lang"]) {
+                    $iscurrent = "text-decoration: underline;";
                 }
+                echo "<li style='list-style: none; margin: 5px;' class='footer-ul-item'><a style='text-decoration: none; $iscurrent' href='$rootpath/actionmgr.php?action=changelanguage&redirect=" . urlencode($_SERVER["PHP_SELF"]) . "&newlang=$lang'>" . strtoupper($lang) . "</a></li>";
+            }
             ?>
         </ul>
         <p class="footer-cp-text">
-            &copy; by Florian Gubler, Jon Bunjaku, Milka Grolp 2022 (Projekt Modul 133)
+            &copy; by Florian Gubler, Jon Bunjaku
         </p>
         <?php
-            if(!$_SESSION["admin"]){
-                ?>
-                    <a class="footer-login" href="<?php echo $rootpath ?>/assets/sites/admin.php"><?php echo $texte->login ?></a>
-                <?php
-            } else{
-                ?>
-                    <a class="footer-login" href="<?php echo $rootpath ?>/assets/sites/admin.php?logout=true"><?php echo $texte->logout ?></a>
-                <?php
-            }
+        if (!$_SESSION["admin"]) {
+        ?>
+            <a class="footer-login" href="<?php echo $rootpath ?>/assets/sites/admin.php"><?php echo $texte->login ?></a>
+        <?php
+        } else {
+        ?>
+            <a class="footer-login" href="<?php echo $rootpath ?>/assets/sites/admin.php?logout=true"><?php echo $texte->logout ?></a>
+        <?php
+        }
         ?>
     </div>
 </div>
