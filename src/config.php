@@ -1,10 +1,10 @@
 <?php
-$rootpath = "https://shop";
+$rootpath = "http://localhost:8000";
 $pathname = $_SERVER["DOCUMENT_ROOT"] . "/";
 
-$hostname = "localhost";
-$username = "root";
-$password = "";
+$hostname = "shop_db";
+$username = "MYSQL_USER";
+$password = "MYSQL_PASSWORD";
 $database = "shopdb";
 
 $mysqli_conn = new mysqli($hostname, $username, $password, $database);
@@ -18,31 +18,30 @@ require_once("assets/dbquerys/dquerys.class.php");
 
 $conn = new DBquery($mysqli_conn);
 
-if(!isset($_SESSION)) {
+if (!isset($_SESSION)) {
     session_start();
 }
 
-if(isset($_GET["sessclr"]) && $_GET["sessclr"] == "true"){
+if (isset($_GET["sessclr"]) && $_GET["sessclr"] == "true") {
     $_SESSION = [];
 }
 
 //Set Defaults
-if(!isset($_SESSION["admin"])){
+if (!isset($_SESSION["admin"])) {
     $_SESSION["admin"] = false;
     $_SESSION["adminid"] = null;
     $_SESSION["adminuser"] = false;
-
-} else if($_SESSION["admin"]){
+} else if ($_SESSION["admin"]) {
     $_SESSION["adminuser"] = $conn->getUserData($_SESSION["adminid"]);
 }
-if(!isset($_SESSION["cart"])){
+if (!isset($_SESSION["cart"])) {
     $_SESSION["cart"] = [];
 }
-if(!isset($_SESSION["lang"])){
+if (!isset($_SESSION["lang"])) {
     $_SESSION["lang"] = "en";
 }
 
-if(!isset($carteditable)){
+if (!isset($carteditable)) {
     $carteditable = true;
 }
 
