@@ -32,9 +32,7 @@ CREATE TABLE `admins` (
 -- Daten für Tabelle `admins`
 --
 
-INSERT INTO `admins` (`PK_admin`, `username`, `email`, `password`) VALUES
-(1, 'Florian Gubler', 'gubler.florian@gmx.net', '04cebe58f37132430715932fac34ccf477fc929bd43d42dc257ba8d39c020069'),
-(2, 'Test', 'test@test.ch', '59761fe11928bb59407dddcecceb9f03ea04c2ba3c8797d9c8437f3981a33448');
+INSERT INTO `admins` (`PK_admin`, `username`, `email`, `password`) VALUES (1, 'Test', 'test@test.ch', '64e4306c389588e6c931880156f6af10677969943b664d2fac76f8ee19d70520');
 
 -- --------------------------------------------------------
 

@@ -14,6 +14,8 @@ if ($mysqli_conn->connect_errno) {
     exit();
 }
 
+$mysqli_conn->set_charset("utf8mb4");
+
 require_once("assets/dbquerys/dquerys.class.php");
 
 $conn = new DBquery($mysqli_conn);

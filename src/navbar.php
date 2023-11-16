@@ -1,4 +1,5 @@
 <?php
+header('Content-type: text/html; charset=utf-8');
 require_once "config.php";
 if (isset($_POST['getjsonofproduct'])) {
     echo $conn->getJSONofProduct($_POST['pkproduct']);
@@ -24,9 +25,9 @@ if (isset($_POST['getjsonofproduct'])) {
 <div class="header-bar">
     <div style="margin-left: 70px;">
         <?php
-            if($_SESSION["admin"]){
-                echo $_SESSION["adminuser"]["username"] . " <i style='color: darkgray'>(" . $_SESSION["adminuser"]["email"] . ")</i>";
-            }
+        if ($_SESSION["admin"]) {
+            echo $_SESSION["adminuser"]["username"] . " <i style='color: darkgray'>(" . $_SESSION["adminuser"]["email"] . ")</i>";
+        }
         ?>
     </div>
     <div class="navbar-logo-container">
@@ -52,12 +53,12 @@ if (isset($_POST['getjsonofproduct'])) {
                 <a href="<?php echo $rootpath ?>/assets/sites/contact.php"><?php echo strtoupper($texte->contact); ?></a>
             </li>
             <?php
-            if($_SESSION["admin"]){
-                ?>
+            if ($_SESSION["admin"]) {
+            ?>
                 <li class="navbar-ul-item">
                     <a href="<?php echo $rootpath ?>/assets/sites/admin.php"><?php echo strtoupper($texte->admin); ?></a>
                 </li>
-                <?php
+            <?php
             }
             ?>
         </ul>
@@ -78,10 +79,10 @@ if (isset($_POST['getjsonofproduct'])) {
 <noscript>You need to have JavaScript enabled to run this site</noscript>
 <script>
     <?php
-        if(isset($_SESSION["showmessage"])){
-            echo "showMessage('" . $_SESSION["showmessage"]["type"] . "', '" . $_SESSION["showmessage"]["text"] . "');";
-            unset($_SESSION["showmessage"]);
-        }
+    if (isset($_SESSION["showmessage"])) {
+        echo "showMessage('" . $_SESSION["showmessage"]["type"] . "', '" . $_SESSION["showmessage"]["text"] . "');";
+        unset($_SESSION["showmessage"]);
+    }
     ?>
 </script>
 <script src="<?php echo $rootpath; ?>/assets/js/expandmenu.js"></script>

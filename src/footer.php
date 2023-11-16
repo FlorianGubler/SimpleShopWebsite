@@ -34,7 +34,7 @@
             ?>
         </ul>
         <p class="footer-cp-text">
-            &copy; by Florian Gubler, Jon Bunjaku
+            &copy; by Florian Gubler, Jon Bunjaku and Laurent Romer
         </p>
         <?php
         if (!$_SESSION["admin"]) {
