@@ -1,10 +1,10 @@
+<?php
+include '../../header.php'
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <?php
-    include '../../header.php'
-    ?>
     <link rel="stylesheet" href="<?php echo $rootpath ?>/assets/css/style_story.css">
     <title><?php echo $texte->titel ?> - <?php echo $texte->story ?></title>
 </head>
