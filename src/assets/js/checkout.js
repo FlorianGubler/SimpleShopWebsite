@@ -1,5 +1,5 @@
 // This is your test publishable API key.
-const stripe = Stripe("pk_live_51KjPsIHFwRqfOP6WFzuToAZlbjp7LsM865wQ56eCMiUGbUnxIjo5ZJEVB1Q8X0Mrpx2SKrEvPVjfMfpDgsFMesa200iS3hxRIE", {
+const stripe = Stripe("pk_test_51KjPsIHFwRqfOP6WvZA0pYrRSAb5wyCDPoDodQeahqayvw8ajxrO83YPGCFUlAkOkVXv5ZP6eKvtvM59Ku8Zvgq500ThOawqZU", {
     locale: LANG
 });
 
@@ -22,7 +22,7 @@ async function initialize() {
     }).then((r) => r.json());
 
     paymentID = paymentIntent.id;
-    elements = stripe.elements({clientSecret: paymentIntent.client_secret});
+    elements = stripe.elements({ clientSecret: paymentIntent.client_secret });
 
     const paymentElement = elements.create("payment");
     paymentElement.mount("#payment-element");
@@ -32,7 +32,7 @@ async function handleSubmit(e) {
     e.preventDefault();
     setLoading(true);
 
-    if(orderid == undefined){
+    if (orderid == undefined) {
         orderid = await fetch(rootpath + "/actionmgr.php", {
             method: "POST",
             headers: {
@@ -107,12 +107,12 @@ function setLoading(isLoading) {
     }
 }
 
-function updateOrder(orderid, newstatus){
+function updateOrder(orderid, newstatus) {
     var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
+    xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             reloadCart(false);
-        } else if(this.readyState == 4){
+        } else if (this.readyState == 4) {
             showMessage("error", TEXTE.error);
         }
     };
@@ -121,12 +121,12 @@ function updateOrder(orderid, newstatus){
     xhttp.send("action=updateorderstatus&orderid=" + orderid + "&newstatus=" + newstatus);
 }
 
-function clearCart(){
+function clearCart() {
     var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
+    xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             reloadCart(false);
-        } else if(this.readyState == 4){
+        } else if (this.readyState == 4) {
             showMessage("error", TEXTE.error);
         }
     };
