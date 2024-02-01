@@ -1,5 +1,5 @@
 <?php
-$rootpath = "http://localhost:8000";
+$rootpath = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]";
 $pathname = $_SERVER["DOCUMENT_ROOT"] . "/";
 
 $hostname = "shop_db";
